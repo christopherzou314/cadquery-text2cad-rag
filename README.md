@@ -1,30 +1,82 @@
-# Text2CAD CadQuery Prototype
+# Text2CAD with CadQuery and RAG
 
-这是一个最小科研原型：
+A research-oriented prototype that converts natural-language descriptions into
+executable CadQuery programs, validates the generated geometry locally, and
+exports CAD models as STEP and STL files.
 
 ```text
-自然语言描述 -> text LLM -> CadQuery Python 代码 -> 本地执行 -> 导出 STEP/STL
+Natural-language prompt
+        -> OpenAI-compatible LLM
+        -> CadQuery Python program
+        -> local execution and repair loop
+        -> STEP / STL / rendered preview
 ```
 
-当前版本先做导师说的轻量原型，不做训练；已经包含一个简单 agent loop：如果 CadQuery 执行失败，会把 traceback 发回 LLM，请它修复代码后重试。
+The project includes a desktop GUI, an execution-feedback agent, SSE streaming,
+two CadQuery retrieval-augmented generation (RAG) modes, and a reproducible
+three-way experiment comparing generation without retrieval, lightweight RAG,
+and full-documentation RAG.
 
-## 1. 选择 VS Code 解释器
+## Features
 
-请先选择一个已经安装 CadQuery 的 Python 环境。在终端中可以用下面的命令确认：
+- OpenAI-compatible `/chat/completions` API integration
+- SSE streaming with retry handling for interrupted or timed-out responses
+- Automatic traceback feedback and code repair after CadQuery execution errors
+- STEP and STL export with support for `Workplane`, `Shape`, and `Assembly`
+- Off-screen VTK rendering for PNG previews
+- Tkinter GUI with optional CQ-editor launch and automatic rendering
+- Baseline, lightweight RAG, and full RAG generation modes
+- Searchable CadQuery Workplane, Sketch, Assembly, Examples, and API references
+- Reproducible experiment scripts, metrics, reports, and visual comparisons
+
+## Requirements
+
+- Python 3.10 or later
+- CadQuery
+- Pillow
+- VTK
+- Tkinter (normally included with Python)
+- CQ-editor (optional)
+
+Use a Python environment in which CadQuery can be imported:
 
 ```bash
 python -c "import cadquery; print(cadquery.__version__)"
 ```
 
-在 VS Code 里可以：
+Install the main Python dependencies if they are not already available:
 
-1. 打开命令面板 `Ctrl+Shift+P`
-2. 选择 `Python: Select Interpreter`
-3. 选择已经安装 CadQuery 的 Python 解释器
+```bash
+python -m pip install cadquery Pillow vtk
+```
 
-如果 VS Code 没显示它，也可以先用终端命令跑。
+## Configuration
 
-## 2. 先不用 API，跑通 CadQuery 导出
+Create a local environment file from the template:
+
+```bash
+cp .env.example .env
+```
+
+Configure an OpenAI-compatible provider in `.env`:
+
+```dotenv
+OPENAI_API_KEY=your-api-key
+OPENAI_BASE_URL=https://api.example.com/v1
+OPENAI_MODEL=your-model-name
+
+# Optional: a specific interpreter containing CadQuery.
+CADQUERY_PYTHON=/path/to/your/cadquery/python
+```
+
+The program appends `/chat/completions` to `OPENAI_BASE_URL`. Do not include that
+suffix in the environment variable.
+
+`.env` is ignored by Git. Never commit API keys or access tokens.
+
+## Quick Start
+
+Run the complete export path without making an API request:
 
 ```bash
 python -m src.text2cad.main \
@@ -32,135 +84,139 @@ python -m src.text2cad.main \
   --mock
 ```
 
-成功后会在 `outputs/` 下面生成一个带时间戳的文件夹，里面包括：
-
-- `generated_model.py`: 生成出来的 CadQuery 代码
-- `model.step`: 可编辑/交换的 CAD 文件
-- `model.stl`: 可预览/网格文件
-- `run.json`: 本次运行的元数据
-- `agent_run.json`: agent 循环摘要
-
-## 3. 接入 LLM API
-
-复制环境变量模板：
-
-```bash
-cp .env.example .env
-```
-
-然后编辑 `.env`，填入你的 API key、base URL 和模型名。也可以直接在终端设置：
-
-```bash
-export OPENAI_API_KEY="sk-..."
-export OPENAI_BASE_URL="https://api.openai.com/v1"
-export OPENAI_MODEL="gpt-4o-mini"
-```
-
-运行：
+Run a real model request:
 
 ```bash
 python -m src.text2cad.main \
-  "a 60 mm by 40 mm by 8 mm rectangular plate with four 5 mm corner holes"
+  "a 90 mm by 50 mm mounting plate with four 6 mm corner holes"
 ```
 
-这个项目使用 OpenAI-compatible `/chat/completions` 接口，所以很多提供兼容 API 的模型都能接。
+Generated artifacts are written to a timestamped directory under `outputs/`:
 
-默认会做最多 2 次错误修复：如果 CadQuery 执行失败，程序会把 traceback 和上一版代码发回 LLM，请它返回修复后的完整代码。可以用 `--max-repairs` 调整：
+```text
+generated_model.py   generated CadQuery program
+model.step           STEP model
+model.stl            STL mesh
+run.json             execution metadata and captured errors
+agent_run.json       agent attempts and generation setting
+retrieval.json       retrieved references when RAG is enabled
+```
+
+## Agent Repair Loop
+
+By default, the agent can make up to two repair attempts. When generated code
+fails, the previous program and its traceback are sent back to the same model,
+which must return a complete corrected program.
 
 ```bash
 python -m src.text2cad.main \
-  "a bracket with two bolt holes" \
+  "an L-shaped bracket with four bolt holes" \
   --max-repairs 3
 ```
 
-API 使用 SSE 流式接收，GUI 日志会持续显示已收到的字符数。请求默认最多等待 300 秒；遇到临时断连、连接重置、超时、限流或常见服务端错误时，会自动重试 3 次，等待间隔为 2、4、8 秒。若流在完成前断开，已收到的残缺内容会被丢弃并从头重试。API 网络重试不计入 CadQuery 代码修复次数。CadQuery 本地执行的默认超时为 180 秒。
+API transport retries are handled separately from code-repair attempts. A
+partially received stream is discarded before the request is retried, preventing
+incomplete code from being executed.
 
-### Baseline 与 Reference-assisted (RAG)
+## RAG Modes
 
-Baseline 不注入额外参考资料：
+The command-line interface and GUI provide three generation settings:
+
+| Mode | CLI option | Reference source |
+|---|---|---|
+| Baseline | `--rag-mode off` | No retrieved context |
+| Lightweight RAG | `--rag-mode lightweight` | Eight curated CadQuery modelling patterns |
+| Full RAG | `--rag-mode full` | Curated patterns, official guides, examples, and API index |
+
+Example:
 
 ```bash
 python -m src.text2cad.main \
-  "an open-top box with 3 mm wall thickness" \
-  --max-repairs 0
+  "an open-top box with 3 mm walls" \
+  --rag-mode full \
+  --rag-top-k 3
 ```
 
-Reference-assisted 会根据 prompt 检索最相关的 CadQuery 知识片段：
-
-```bash
-python -m src.text2cad.main \
-  "an open-top box with 3 mm wall thickness" \
-  --max-repairs 0 \
-  --rag
-```
-
-知识库位于 `knowledge/`，包含人工整理模式、官方指南主题和由本机 CadQuery API 自动生成的完整索引。每次 RAG 运行会在 run 文件夹保存 `retrieval.json`，记录命中的条目、分数、内容和来源。
-
-GUI 的 `Knowledge mode` 有三档：
-
-- `Baseline (no RAG)`：不注入知识库。
-- `Lightweight RAG (8 entries)`：只使用最初的 `cadquery_reference.json`。
-- `Full RAG (all entries)`：使用人工条目、官方指南和完整 API 索引。
-
-命令行分别使用 `--rag-mode lightweight` 和 `--rag-mode full`。旧参数 `--rag` 仍保留，并等同于 `--rag-mode full`。
-
-CadQuery 升级后可以重新生成 API 与官方指南索引：
+The knowledge base is stored in [`knowledge/`](knowledge/). Rebuild the API and
+official-guide indexes after upgrading CadQuery:
 
 ```bash
 python scripts/build_cadquery_reference.py
 ```
 
-## 4. 打开 GUI
+## Desktop GUI
 
-运行：
+Start the GUI with:
 
 ```bash
 python -m src.text2cad.gui
 ```
 
-GUI 里可以直接输入想生成的 CAD 描述，然后点 `Generate and render`。成功后会显示：
+The interface supports prompt entry, repair-count selection, knowledge-mode
+selection, generation logs, source-code inspection, and rendered STL previews.
+When CQ-editor is available, the generated model can also be opened and rendered
+automatically in its interactive 3D viewport.
 
-- 渲染预览图
-- 生成的 CadQuery 代码
-- STEP/STL 输出路径
-- 本次 agent 尝试次数
-- 如果勾选 `Open 3D in CQ-editor after success`，成功后会自动打开 CQ-editor，并自动运行代码展示 3D 模型
+## RAG Experiment
 
-GUI 会额外生成一个 `cq_editor_view.py`。这个文件不是 LLM 输出，而是给 CQ-editor 用的显示包装脚本：它读取 `generated_model.py` 的 `result`，再调用 `show_object(result)`。
+The included experiment evaluates 10 prompts at increasing difficulty under all
+three generation settings. Traceback repair is disabled during evaluation so
+that compilation measures the first generated program.
 
-GUI 还会生成一个 `launch_cq_editor_autorun.py`。这个文件负责启动 CQ-editor、加载 `cq_editor_view.py`，然后自动触发一次 Render，所以通常不需要你再手动点 Run。
+| Metric | Baseline | Lightweight RAG | Full RAG |
+|---|---:|---:|---:|
+| First-generation compilation success | 100% | 100% | 100% |
+| Visible geometry | 100% | 100% | 100% |
+| Explicit dimensions reasonable | 90% | 90% | 100% |
+| Mean visual quality (1-5) | 4.60 | 4.70 | 4.90 |
+| Mean readability (1-5) | 4.90 | 4.90 | 5.00 |
 
-### GLM-5.2 / Z.AI 配置示例
+![Three-way comparison for prompts P06-P10](experiments/cadquery_rag/results/contact_sheets/three_way_2.png)
 
-如果你要调用 GLM-5.2，把 `.env` 改成：
+Full reports and result tables are available under
+[`experiments/cadquery_rag/results/`](experiments/cadquery_rag/results/).
+
+Run the experiment and rebuild the report with:
 
 ```bash
-OPENAI_API_KEY=你的Z.AI_API_KEY
-OPENAI_BASE_URL=https://api.z.ai/api/paas/v4
-OPENAI_MODEL=glm-5.2
-CADQUERY_PYTHON=/path/to/your/cadquery/python
+python scripts/run_rag_experiment.py --resume
+python scripts/analyze_rag_experiment.py
 ```
 
-注意：`OPENAI_BASE_URL` 填到 `/v4` 即可，不要把 `/chat/completions` 写进去；程序会自动补上。
+## Tests
 
-## 5. 代码结构
+Run the test suite with:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+The tests cover streaming response assembly, connection retries, partial-stream
+recovery, RAG retrieval behavior, and CadQuery Assembly export.
+
+## Project Structure
 
 ```text
 src/text2cad/
-  main.py       命令行入口
-  gui.py        本地输入和预览界面
-  agent.py      生成-执行-失败修复循环
-  llm.py        调 OpenAI-compatible API
-  prompts.py    给 LLM 的系统提示词和代码清洗
-  runner.py     执行 CadQuery 代码并导出 STEP/STL
-  renderer.py   把 STL 渲染成 GUI 预览图
+  main.py       command-line interface
+  gui.py        desktop interface and CQ-editor integration
+  agent.py      generation, execution, and traceback-repair loop
+  llm.py        streaming OpenAI-compatible API client
+  prompts.py    generation prompts and response cleanup
+  rag.py        reference loading, retrieval, and logging
+  runner.py     isolated-process execution and STEP/STL export
+  renderer.py   off-screen VTK preview rendering
+
+knowledge/      curated and generated CadQuery references
+experiments/    fixed prompts, reports, metrics, and comparison figures
+scripts/        knowledge-index and experiment utilities
+tests/          unit and export regression tests
 ```
 
-## 6. 第一阶段科研可以怎么扩展
+## Security
 
-建议按这个顺序推进：
-
-1. 记录 Valid Syntax Rate：生成的代码能不能成功执行。
-2. 保存 prompt、代码、错误信息、导出文件，方便复现实验。
-3. 统计修复前后成功率：first-pass success 和 after-repair success 分开记录。
-4. 再考虑更强的视觉反馈，例如多视角渲染和 VLM 评价。
+This project executes Python code produced by an LLM. The generated program is
+run in a separate process with a timeout, but it is not a complete security
+sandbox. Use trusted model providers, inspect generated code when appropriate,
+and run the project in an isolated development environment when testing unknown
+prompts or models.
