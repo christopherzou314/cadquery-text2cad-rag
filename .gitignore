@@ -1,0 +1,18 @@
+.env
+outputs/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Keep final experiment reports/figures, not machine-local raw runs and paths.
+experiments/**/results/raw/
+experiments/**/results/records.json
+experiments/**/results/results.csv
+experiments/**/results/paired_results.csv
+experiments/**/results/**/comparison_*.png

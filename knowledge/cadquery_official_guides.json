@@ -1,0 +1,666 @@
+[
+  {
+    "id": "workplane.coordinates",
+    "title": "Workplane local coordinates",
+    "category": "official_guide",
+    "keywords": [
+      "workplane",
+      "plane",
+      "coordinates",
+      "origin"
+    ],
+    "content": "Workplanes define a local 2D coordinate system in 3D space. Features are created relative to the active plane; face-based workplanes reduce manual global-coordinate calculations.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/workplane.html"
+  },
+  {
+    "id": "workplane.2d",
+    "title": "Workplane 2D construction",
+    "category": "official_guide",
+    "keywords": [
+      "line",
+      "arc",
+      "circle",
+      "rect",
+      "polyline",
+      "profile",
+      "2d"
+    ],
+    "content": "Use lines, arcs, circles, rectangles, polygons, splines and points to create closed wires or construction geometry before a 3D operation.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/workplane.html"
+  },
+  {
+    "id": "workplane.3d",
+    "title": "Workplane 3D construction",
+    "category": "official_guide",
+    "keywords": [
+      "box",
+      "cylinder",
+      "sphere",
+      "extrude",
+      "revolve",
+      "sweep",
+      "loft",
+      "3d"
+    ],
+    "content": "Create direct primitives or turn pending 2D wires into solids with extrude, revolve, sweep, loft and related operations.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/workplane.html"
+  },
+  {
+    "id": "workplane.selectors",
+    "title": "Workplane selectors",
+    "category": "official_guide",
+    "keywords": [
+      "selector",
+      "faces",
+      "edges",
+      "vertices",
+      "wires",
+      "solids"
+    ],
+    "content": "Selectors filter topology such as faces, edges, vertices, wires and solids. Direction selectors like >Z and type selectors can drive subsequent features.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/workplane.html"
+  },
+  {
+    "id": "workplane.construction",
+    "title": "Construction geometry",
+    "category": "official_guide",
+    "keywords": [
+      "construction",
+      "forconstruction",
+      "vertices",
+      "pattern",
+      "holes"
+    ],
+    "content": "Construction geometry locates features without becoming part of the final profile. A construction rectangle followed by vertices is a common hole-pattern technique.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/workplane.html"
+  },
+  {
+    "id": "workplane.stack",
+    "title": "Workplane stack and iteration",
+    "category": "official_guide",
+    "keywords": [
+      "stack",
+      "each",
+      "all",
+      "first",
+      "last",
+      "end",
+      "iteration"
+    ],
+    "content": "Each chained operation returns a Workplane with stack objects and a parent. Many methods apply automatically to every location or object on the stack.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/workplane.html"
+  },
+  {
+    "id": "workplane.chaining",
+    "title": "Workplane chaining and tags",
+    "category": "official_guide",
+    "keywords": [
+      "chain",
+      "parent",
+      "tag",
+      "workplanefromtagged"
+    ],
+    "content": "Fluent chains preserve parent links and shared modelling context. Tags let later operations return to a named state or select from it.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/workplane.html"
+  },
+  {
+    "id": "workplane.context",
+    "title": "Context solid and pending wires",
+    "category": "official_guide",
+    "keywords": [
+      "context",
+      "solid",
+      "pending",
+      "topending",
+      "combine"
+    ],
+    "content": "The first solid becomes the context solid. Later additive or subtractive operations search the parent chain for it; combine=False keeps new solids separate. Pending wires feed 3D operations.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/workplane.html"
+  },
+  {
+    "id": "sketch.face_api",
+    "title": "Sketch face-based API and modes",
+    "category": "official_guide",
+    "keywords": [
+      "sketch",
+      "face",
+      "mode",
+      "add",
+      "subtract",
+      "intersect",
+      "replace",
+      "construction"
+    ],
+    "content": "Sketch face operations combine geometry in-place using additive, subtractive, intersect, replace or construction modes. Sketch selection must be reset explicitly because Sketch has no history chain.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/sketch.html"
+  },
+  {
+    "id": "sketch.edge_api",
+    "title": "Sketch edge-based API",
+    "category": "official_guide",
+    "keywords": [
+      "sketch",
+      "segment",
+      "arc",
+      "edge",
+      "assemble",
+      "close"
+    ],
+    "content": "Build individual segments and arcs, close or connect them, then call assemble() to convert edge geometry into faces before face operations.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/sketch.html"
+  },
+  {
+    "id": "sketch.hull",
+    "title": "Sketch convex hull",
+    "category": "official_guide",
+    "keywords": [
+      "sketch",
+      "hull",
+      "convex",
+      "circle",
+      "segment"
+    ],
+    "content": "The experimental hull operation creates a convex hull for supported straight segments and circles.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/sketch.html"
+  },
+  {
+    "id": "sketch.constraints",
+    "title": "Sketch constraints and solver",
+    "category": "official_guide",
+    "keywords": [
+      "sketch",
+      "constraint",
+      "solve",
+      "coincident",
+      "angle",
+      "length",
+      "distance",
+      "radius",
+      "orientation"
+    ],
+    "content": "Experimental sketch constraints support fixed points, coincidence, angle, length, distance, radius, orientation and arc angle for segments and arcs; solve before assemble.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/sketch.html"
+  },
+  {
+    "id": "sketch.workplane",
+    "title": "Sketch and Workplane integration",
+    "category": "official_guide",
+    "keywords": [
+      "sketch",
+      "finalize",
+      "placesketch",
+      "extrude",
+      "revolve",
+      "sweep",
+      "loft"
+    ],
+    "content": "Create sketches in-place with Workplane.sketch().finalize(), or reuse an existing Sketch with placeSketch(). Sketches can drive extrude, twistExtrude, revolve, sweep, cuts and loft.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/sketch.html"
+  },
+  {
+    "id": "sketch.multi",
+    "title": "Sketch reuse, offsets, import and export",
+    "category": "official_guide",
+    "keywords": [
+      "sketch",
+      "multiple",
+      "offset",
+      "export",
+      "import",
+      "dxf"
+    ],
+    "content": "Sketches can be placed at multiple stack locations, combined, offset, lofted between, and imported or exported for reuse.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/sketch.html"
+  },
+  {
+    "id": "assembly.parameters",
+    "title": "Assembly parameters and reusable components",
+    "category": "official_guide",
+    "keywords": [
+      "assembly",
+      "parameter",
+      "component",
+      "function",
+      "reusable"
+    ],
+    "content": "Define shared dimensions first and create reusable component functions. Add named component instances to a cq.Assembly so parts remain identifiable.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/assy.html"
+  },
+  {
+    "id": "assembly.locations",
+    "title": "Assembly object locations",
+    "category": "official_guide",
+    "keywords": [
+      "assembly",
+      "location",
+      "translate",
+      "rotate",
+      "position"
+    ],
+    "content": "Parts may be placed explicitly with Location values. Explicit placement is often the simplest robust approach when exact constraint solving is unnecessary.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/assy.html"
+  },
+  {
+    "id": "assembly.constraints",
+    "title": "Assembly constraints",
+    "category": "official_guide",
+    "keywords": [
+      "assembly",
+      "constraint",
+      "point",
+      "axis",
+      "plane",
+      "fixed",
+      "solve"
+    ],
+    "content": "Assembly constraints include Point, Axis, Plane, PointInPlane, PointOnLine, FixedPoint, FixedRotation and FixedAxis. Name or tag mating topology, constrain it, then solve.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/assy.html"
+  },
+  {
+    "id": "assembly.colors",
+    "title": "Assembly colors and hierarchy",
+    "category": "official_guide",
+    "keywords": [
+      "assembly",
+      "color",
+      "nested",
+      "hierarchy",
+      "subassembly"
+    ],
+    "content": "Assembly items and nested subassemblies can have names, colors, materials, metadata and relative locations.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/assy.html"
+  },
+  {
+    "id": "assembly.export",
+    "title": "Assembly export",
+    "category": "official_guide",
+    "keywords": [
+      "assembly",
+      "export",
+      "step",
+      "xml",
+      "gltf",
+      "compound"
+    ],
+    "content": "Assemblies can be converted to compounds or exported in supported assembly-aware formats. Preserve names and hierarchy when the chosen format supports them.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/assy.html"
+  },
+  {
+    "id": "examples.simple_plate",
+    "title": "Official example topic: Simple Plate",
+    "category": "official_example",
+    "keywords": [
+      "box",
+      "plate",
+      "primitive"
+    ],
+    "content": "Create a basic rectangular plate with Workplane.box.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.plate_with_hole",
+    "title": "Official example topic: Plate With Hole",
+    "category": "official_example",
+    "keywords": [
+      "plate",
+      "hole",
+      "faces",
+      "workplane"
+    ],
+    "content": "Select the top face, create a workplane and drill a centered through-hole.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.extruded_prism",
+    "title": "Official example topic: Extruded Prism",
+    "category": "official_example",
+    "keywords": [
+      "circle",
+      "rect",
+      "extrude",
+      "profile"
+    ],
+    "content": "Combine closed 2D profiles and extrude them into a prismatic solid.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.lines_and_arcs",
+    "title": "Official example topic: Lines And Arcs",
+    "category": "official_example",
+    "keywords": [
+      "lineto",
+      "threepointarc",
+      "close",
+      "profile"
+    ],
+    "content": "Build a closed profile using lines and arcs, then extrude it.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.moving_workpoint",
+    "title": "Official example topic: Moving Workpoint",
+    "category": "official_example",
+    "keywords": [
+      "center",
+      "move",
+      "working",
+      "point"
+    ],
+    "content": "Move the local working point to place multiple profile features.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.point_lists",
+    "title": "Official example topic: Point Lists",
+    "category": "official_example",
+    "keywords": [
+      "pushpoints",
+      "pattern",
+      "points"
+    ],
+    "content": "Push multiple locations onto the stack so later operations repeat at each point.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.polygons",
+    "title": "Official example topic: Polygons",
+    "category": "official_example",
+    "keywords": [
+      "polygon",
+      "cutthruall"
+    ],
+    "content": "Create polygonal profiles at stack points and use them for cuts or solids.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.polylines",
+    "title": "Official example topic: Polylines",
+    "category": "official_example",
+    "keywords": [
+      "polyline",
+      "mirror",
+      "beam"
+    ],
+    "content": "Build point-driven profiles with polyline and mirror symmetric halves.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.spline_edge",
+    "title": "Official example topic: Spline Edge",
+    "category": "official_example",
+    "keywords": [
+      "spline",
+      "curve",
+      "profile"
+    ],
+    "content": "Use spline points for smooth complex profile edges.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.mirroring",
+    "title": "Official example topic: Mirroring",
+    "category": "official_example",
+    "keywords": [
+      "mirror",
+      "symmetric",
+      "union"
+    ],
+    "content": "Mirror 2D profiles, 3D objects, or geometry about selected faces and optionally union results.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.face_workplanes",
+    "title": "Official example topic: Face Workplanes",
+    "category": "official_example",
+    "keywords": [
+      "faces",
+      "workplane",
+      "vertex",
+      "offset",
+      "rotated",
+      "copyworkplane"
+    ],
+    "content": "Create, offset, copy, rotate or locate workplanes from selected faces and vertices.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.construction_geometry",
+    "title": "Official example topic: Construction Geometry",
+    "category": "official_example",
+    "keywords": [
+      "construction",
+      "forconstruction",
+      "holes"
+    ],
+    "content": "Use construction profiles and their vertices to locate repeated features.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.shelling",
+    "title": "Official example topic: Shelling",
+    "category": "official_example",
+    "keywords": [
+      "shell",
+      "thin",
+      "wall",
+      "hollow"
+    ],
+    "content": "Shell solids inward or outward and select faces to remove for openings.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.lofts",
+    "title": "Official example topic: Lofts",
+    "category": "official_example",
+    "keywords": [
+      "loft",
+      "section",
+      "transition"
+    ],
+    "content": "Loft through multiple closed section wires to create changing cross-sections.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.sweeps",
+    "title": "Official example topic: Sweeps",
+    "category": "official_example",
+    "keywords": [
+      "sweep",
+      "path",
+      "profile"
+    ],
+    "content": "Sweep a profile along a path, choosing transitions appropriate to the geometry.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.blind_and_projected_cuts",
+    "title": "Official example topic: Blind And Projected Cuts",
+    "category": "official_example",
+    "keywords": [
+      "cutblind",
+      "cutthruall",
+      "project",
+      "next"
+    ],
+    "content": "Cut to a fixed depth, through all, or to a target face while ensuring projection is valid.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.special_holes",
+    "title": "Official example topic: Special Holes",
+    "category": "official_example",
+    "keywords": [
+      "cborehole",
+      "cskhole",
+      "counterbore",
+      "countersink"
+    ],
+    "content": "Use built-in counterbore and countersink operations at one or many stack locations.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.offset_profiles",
+    "title": "Official example topic: Offset Profiles",
+    "category": "official_example",
+    "keywords": [
+      "offset2d",
+      "topending",
+      "wire"
+    ],
+    "content": "Move selected edges to pending geometry before applying 2D offsets.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.edge_finishing",
+    "title": "Official example topic: Edge Finishing",
+    "category": "official_example",
+    "keywords": [
+      "fillet",
+      "chamfer",
+      "edges",
+      "round"
+    ],
+    "content": "Select suitable edges before applying fillets or chamfers; radii must fit local geometry.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.text",
+    "title": "Official example topic: Text",
+    "category": "official_example",
+    "keywords": [
+      "text",
+      "engrave",
+      "emboss"
+    ],
+    "content": "Create text profiles and combine or cut them with solids.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.occ_bottle",
+    "title": "Official example topic: Occ Bottle",
+    "category": "official_example",
+    "keywords": [
+      "bottle",
+      "profile",
+      "mirror",
+      "extrude",
+      "shell",
+      "thread"
+    ],
+    "content": "The classic bottle combines a mirrored profile, extrusion, neck feature and shelling.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.parametric_enclosure",
+    "title": "Official example topic: Parametric Enclosure",
+    "category": "official_example",
+    "keywords": [
+      "enclosure",
+      "parameter",
+      "shell",
+      "boss",
+      "screw"
+    ],
+    "content": "A parameterized enclosure combines shells, rounded edges, screw posts, cuts and repeated features.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.lego_brick",
+    "title": "Official example topic: Lego Brick",
+    "category": "official_example",
+    "keywords": [
+      "lego",
+      "brick",
+      "parameter",
+      "shell",
+      "array"
+    ],
+    "content": "A parametric brick derives body dimensions, shell thickness, studs and underside posts from bump counts.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.braille",
+    "title": "Official example topic: Braille",
+    "category": "official_example",
+    "keywords": [
+      "braille",
+      "text",
+      "sphere",
+      "pattern"
+    ],
+    "content": "Map text to point patterns and construct raised dot geometry parametrically.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.connector_panel",
+    "title": "Official example topic: Connector Panel",
+    "category": "official_example",
+    "keywords": [
+      "panel",
+      "connector",
+      "hole",
+      "arc",
+      "pattern"
+    ],
+    "content": "Construct a panel containing repeated complex connector cutout profiles.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "examples.cycloidal_gear",
+    "title": "Official example topic: Cycloidal Gear",
+    "category": "official_example",
+    "keywords": [
+      "gear",
+      "cycloidal",
+      "parametriccurve",
+      "twistextrude"
+    ],
+    "content": "Generate a cycloidal profile from a parametric curve and twist-extrude it into a helical gear.",
+    "example": "",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  }
+]

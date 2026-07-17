@@ -1,0 +1,72 @@
+[
+  {
+    "id": "P01",
+    "difficulty": "easy",
+    "category": "primitive",
+    "prompt": "Create a solid cube with side length 30 mm. Center it on the XY plane with its bottom at Z=0. Keep the side length as a named parameter.",
+    "target_dimensions_mm": [30, 30, 30]
+  },
+  {
+    "id": "P02",
+    "difficulty": "easy",
+    "category": "primitive",
+    "prompt": "Create a vertical solid cylinder 50 mm high and 24 mm in diameter, with its base at Z=0. Keep diameter and height as named parameters.",
+    "target_dimensions_mm": [24, 24, 50]
+  },
+  {
+    "id": "P03",
+    "difficulty": "medium",
+    "category": "container",
+    "prompt": "Create an open-top rectangular storage box. Outer dimensions are 80 mm long, 50 mm wide, and 30 mm high. Wall thickness and bottom thickness are both 3 mm. The cavity must be visibly open from the top. Use named dimension parameters.",
+    "target_dimensions_mm": [80, 50, 30]
+  },
+  {
+    "id": "P04",
+    "difficulty": "medium",
+    "category": "furniture",
+    "prompt": "Create a simple table consisting of a 100 x 60 x 5 mm tabletop and four square legs. Each leg is 8 x 8 mm and extends 45 mm downward from the tabletop. Place one leg near each corner and make a single final model. Use named parameters.",
+    "target_dimensions_mm": [100, 60, 50]
+  },
+  {
+    "id": "P05",
+    "difficulty": "medium",
+    "category": "furniture",
+    "prompt": "Create a simple chair with a 45 x 45 x 5 mm seat at a height of 45 mm, four 5 x 5 mm legs reaching the floor, and a backrest 45 mm wide, 5 mm thick, and 40 mm high rising from the rear of the seat. Fuse the pieces into one final model and use named parameters.",
+    "target_dimensions_mm": [45, 45, 85]
+  },
+  {
+    "id": "P06",
+    "difficulty": "medium",
+    "category": "parameterized_part",
+    "prompt": "Create a parameterized mounting plate 90 mm long, 50 mm wide, and 6 mm thick. Add four through holes of 6 mm diameter. Each hole center is inset 8 mm from its two nearest edges. Keep all major dimensions and the edge inset as named parameters.",
+    "target_dimensions_mm": [90, 50, 6]
+  },
+  {
+    "id": "P07",
+    "difficulty": "hard",
+    "category": "mechanical_part",
+    "prompt": "Create a flanged pipe adapter aligned with the Z axis. It has a circular flange 60 mm in diameter and 6 mm thick, a concentric hub 32 mm in diameter extending 25 mm above the flange, and a 16 mm diameter bore passing through everything. Add four 5 mm bolt holes equally spaced on a 46 mm bolt circle. Use named parameters.",
+    "target_dimensions_mm": [60, 60, 31]
+  },
+  {
+    "id": "P08",
+    "difficulty": "hard",
+    "category": "mechanical_part",
+    "prompt": "Create an L-shaped mounting bracket from two perpendicular plates, each 70 mm long, 35 mm wide, and 5 mm thick. The horizontal plate has two 6 mm through holes and the vertical plate has two 6 mm through holes, arranged symmetrically. Fuse the plates and keep dimensions as named parameters.",
+    "target_dimensions_mm": [70, 35, 40]
+  },
+  {
+    "id": "P09",
+    "difficulty": "hard",
+    "category": "multi_part",
+    "prompt": "Create a small four-wheel cart as a CadQuery Assembly. Use a rectangular body 90 x 45 x 20 mm with its bottom at Z=20 mm, four cylindrical wheels 24 mm in diameter and 8 mm wide, and two axles 55 mm long and 4 mm in diameter. Orient all wheel and axle axes along Y, place two wheels on each side, and assign the complete Assembly to result. Use named parameters.",
+    "target_dimensions_mm": [90, 61, 40]
+  },
+  {
+    "id": "P10",
+    "difficulty": "complex",
+    "category": "multi_part",
+    "prompt": "Create a recognizable simplified airplane as a CadQuery Assembly, pointing along +X. Include a 100 mm long tapered fuselage, a main wing with 120 mm total span and about 24 mm chord, horizontal tailplanes with 45 mm span, a vertical tail fin, and a small cylindrical nose. Use symmetric placement, sensible thicknesses, named parameters, and assign the complete Assembly to result.",
+    "target_dimensions_mm": [null, 120, null]
+  }
+]

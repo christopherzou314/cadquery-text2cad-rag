@@ -1,0 +1,17 @@
+{
+  "started_at_utc": "2026-07-17T05:53:46.518829+00:00",
+  "model": "glm-5.2",
+  "base_url_host": "api.z.ai",
+  "conditions": [
+    "baseline",
+    "lightweight_rag",
+    "full_rag"
+  ],
+  "rag_library": "knowledge/cadquery_reference.json (original 8 entries)",
+  "rag_top_k": 3,
+  "max_repairs": 0,
+  "api_retries": 3,
+  "temperature": 0.1,
+  "prompt_count": 10,
+  "order": "Alternating condition order by prompt ID"
+}

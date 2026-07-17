@@ -1,0 +1,66 @@
+[
+  {
+    "id": "workplane_primitives",
+    "title": "Workplanes and robust primitives",
+    "keywords": ["box", "cube", "cylinder", "sphere", "plate", "table", "chair", "primitive", "方块", "立方体", "圆柱", "球", "板", "桌子", "椅子"],
+    "content": "Start with `cq.Workplane(\"XY\")`. Prefer direct primitives for robust geometry: `.box(length, width, height)`, `.cylinder(height, radius)`, and `.sphere(radius)`. Dimensions are in millimeters. Keep important dimensions in named variables and assign the final object to `result`.",
+    "example": "length = 60\nwidth = 40\nheight = 10\nresult = cq.Workplane(\"XY\").box(length, width, height)",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/workplane.html"
+  },
+  {
+    "id": "holes_and_patterns",
+    "title": "Holes and repeated hole locations",
+    "keywords": ["hole", "holes", "bore", "mounting", "bolt", "pattern", "孔", "通孔", "安装孔", "螺栓", "阵列"],
+    "content": "Create the base solid first, select a planar face, then create a workplane. `.hole(diameter)` cuts through the context solid when depth is omitted. For repeated holes, use `.pushPoints([(x1, y1), ...]).hole(diameter)`. Coordinates passed to `pushPoints` are local to the current workplane.",
+    "example": "result = (cq.Workplane(\"XY\").box(60, 40, 5).faces(\">Z\").workplane().pushPoints([(-22, -12), (-22, 12), (22, -12), (22, 12)]).hole(5))",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/classreference.html#cadquery.Workplane.hole"
+  },
+  {
+    "id": "shell_and_thickness",
+    "title": "Open-top shells and wall thickness",
+    "keywords": ["shell", "hollow", "wall", "thickness", "open-top", "container", "box", "壳", "空心", "壁厚", "开口", "盒子", "容器"],
+    "content": "For an open-top container, create a solid, select the face to remove, and call `.shell(-wall_thickness)`. A negative shell thickness generally hollows inward and preserves the requested outside dimensions. Shell operations can fail on tiny fillets or overly large thickness, so shell before decorative fillets.",
+    "example": "wall = 3\nresult = cq.Workplane(\"XY\").box(80, 60, 40).faces(\">Z\").shell(-wall)",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "profiles_extrude_revolve",
+    "title": "Profiles, extrusion, and revolution",
+    "keywords": ["profile", "extrude", "revolve", "pulley", "groove", "bracket", "wheel", "轴对称", "拉伸", "旋转体", "滑轮", "槽", "支架", "轮子"],
+    "content": "Use a closed 2D profile followed by `.extrude(distance)` for prismatic parts. Use a closed half-profile followed by `.revolve(angleDegrees=360)` for axisymmetric parts. Build profiles with `.rect`, `.circle`, `.polyline`, `.lineTo`, and `.close()`. Prefer one clear profile over many fragile boolean operations.",
+    "example": "result = (cq.Workplane(\"XZ\").moveTo(5, 0).lineTo(15, 0).lineTo(15, 8).lineTo(5, 8).close().revolve(360, (0, 0), (0, 1)))",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html"
+  },
+  {
+    "id": "loft_and_tapered_forms",
+    "title": "Lofted and tapered forms",
+    "keywords": ["loft", "taper", "fuselage", "airplane", "aircraft", "wing", "car", "vehicle", "body", "流线", "渐缩", "机身", "飞机", "机翼", "汽车", "车身"],
+    "content": "Use `.loft()` when a shape changes cross-section along an axis. Create multiple closed section wires on offset workplanes, then loft through them. Keep section ordering consistent and avoid reducing a section to exactly zero size; use a small end section instead. For simplified vehicles and aircraft, combine a small number of robust lofted or primitive solids.",
+    "example": "result = (cq.Workplane(\"YZ\").ellipse(2, 2).workplane(offset=20).ellipse(8, 6).workplane(offset=60).ellipse(3, 3).loft(combine=True))",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/classreference.html#cadquery.Workplane.loft"
+  },
+  {
+    "id": "transformations_and_symmetry",
+    "title": "Translation, rotation, and symmetry",
+    "keywords": ["translate", "rotate", "mirror", "position", "left", "right", "symmetric", "wing", "wheel", "移动", "旋转", "镜像", "定位", "左", "右", "对称", "机翼", "车轮"],
+    "content": "Build parts near a clear local origin, then place them with `.translate((x, y, z))` or `.rotate(axisStart, axisEnd, angleDegrees)`. Use mirrored coordinates or `.mirror()` for symmetric parts. Establish one global convention before assembly, for example X front-to-back, Y left-to-right, and Z bottom-to-top.",
+    "example": "left = wing.translate((0, 20, 5))\nright = wing.mirror(\"XZ\").translate((0, -20, 5))",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/examples.html#mirroring-from-faces"
+  },
+  {
+    "id": "assemblies",
+    "title": "Multi-part objects and Assembly",
+    "keywords": ["assembly", "multi-part", "parts", "table", "chair", "car", "vehicle", "airplane", "aircraft", "engine", "wheel", "组装", "多部件", "桌子", "椅子", "汽车", "飞机", "发动机", "车轮"],
+    "content": "Use `cq.Assembly()` when the requested object has distinct parts. Create each part as a Workplane or Shape, place it consistently, and add it with a unique name. Keep the assembly itself in `result`. For a first-pass model, explicit locations are often more robust than complex assembly constraints.",
+    "example": "result = cq.Assembly()\nresult.add(body, name=\"body\")\nresult.add(wheel.translate((20, 15, 0)), name=\"front_left_wheel\")",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/assy.html"
+  },
+  {
+    "id": "parameterization",
+    "title": "Readable parameterized CadQuery code",
+    "keywords": ["parameter", "parameterized", "dimension", "configurable", "size", "length", "width", "height", "diameter", "参数", "参数化", "尺寸", "可调", "长度", "宽度", "高度", "直径"],
+    "content": "Put user-facing dimensions in named variables at the top of the program. Derive repeated offsets from those variables instead of duplicating numeric literals. Use descriptive part names and short construction steps. The model should rebuild correctly when a main dimension changes within a reasonable range.",
+    "example": "plate_length = 80\nplate_width = 50\nplate_thickness = 6\nhole_diameter = 5\nedge_offset = 8",
+    "source_url": "https://cadquery.readthedocs.io/en/latest/intro.html"
+  }
+]

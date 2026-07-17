@@ -1,0 +1,14 @@
+{
+  "cadquery_version": "2.9.0.dev0",
+  "api_entry_count": 476,
+  "guide_entry_count": 45,
+  "generated_from": "Installed CadQuery signatures and docstrings",
+  "official_sources": [
+    "https://cadquery.readthedocs.io/en/latest/workplane.html",
+    "https://cadquery.readthedocs.io/en/latest/sketch.html",
+    "https://cadquery.readthedocs.io/en/latest/assy.html",
+    "https://cadquery.readthedocs.io/en/latest/classreference.html",
+    "https://cadquery.readthedocs.io/en/latest/examples.html",
+    "https://cadquery.readthedocs.io/en/latest/free-func.html"
+  ]
+}
