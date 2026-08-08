@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/cadquery-benchmark-v1-case-schema.json",
+  "title": "CadQuery Benchmark Case Set",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "benchmark_id",
+    "benchmark_version",
+    "evaluation_schema_version",
+    "phase",
+    "cases"
+  ],
+  "properties": {
+    "benchmark_id": {"const": "cadquery_benchmark_v1"},
+    "benchmark_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "evaluation_schema_version": {"const": "2.0"},
+    "phase": {"const": "full"},
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/case"}
+    }
+  },
+  "$defs": {
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "category",
+        "difficulty",
+        "prompt",
+        "expected_behavior",
+        "parameterization_required",
+        "constraints",
+        "manual_checks",
+        "tags"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^B[0-9]{3}$"},
+        "title": {"type": "string", "minLength": 3},
+        "category": {
+          "enum": [
+            "primitive",
+            "holes_and_slots",
+            "thin_wall",
+            "revolved",
+            "complex_boolean",
+            "curved_surface",
+            "assembly",
+            "ambiguous",
+            "conflicting",
+            "out_of_distribution"
+          ]
+        },
+        "difficulty": {"enum": ["easy", "medium", "hard", "complex"]},
+        "prompt": {"type": "string", "minLength": 20},
+        "expected_behavior": {
+          "enum": [
+            "generate",
+            "generate_with_reasonable_assumptions",
+            "clarify_before_generation",
+            "best_effort_generation"
+          ]
+        },
+        "parameterization_required": {"type": "boolean"},
+        "constraints": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/constraint"}
+        },
+        "manual_checks": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/manual_check"}
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "notes": {"type": "string"}
+      }
+    },
+    "constraint": {
+      "oneOf": [
+        {"$ref": "#/$defs/bbox_dimensions"},
+        {"$ref": "#/$defs/bbox_bounds"},
+        {"$ref": "#/$defs/solid_count"},
+        {"$ref": "#/$defs/cylindrical_hole_pattern"}
+      ]
+    },
+    "axis_values": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "x": {"type": "number"},
+        "y": {"type": "number"},
+        "z": {"type": "number"}
+      }
+    },
+    "bbox_dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "hard", "expected_mm"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "type": {"const": "bbox_dimensions"},
+        "hard": {"type": "boolean"},
+        "expected_mm": {"$ref": "#/$defs/axis_values"},
+        "absolute_tolerance_mm": {"type": "number", "minimum": 0},
+        "relative_tolerance": {"type": "number", "minimum": 0}
+      }
+    },
+    "bbox_bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "hard"],
+      "anyOf": [
+        {"required": ["expected_min_mm"]},
+        {"required": ["expected_max_mm"]}
+      ],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "type": {"const": "bbox_bounds"},
+        "hard": {"type": "boolean"},
+        "expected_min_mm": {"$ref": "#/$defs/axis_values"},
+        "expected_max_mm": {"$ref": "#/$defs/axis_values"},
+        "absolute_tolerance_mm": {"type": "number", "minimum": 0},
+        "relative_tolerance": {"type": "number", "minimum": 0}
+      }
+    },
+    "solid_count": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "hard", "expected"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "type": {"const": "solid_count"},
+        "hard": {"type": "boolean"},
+        "expected": {"type": "integer", "minimum": 1}
+      }
+    },
+    "cylindrical_hole_pattern": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "hard",
+        "expected_count",
+        "diameter_mm",
+        "axis",
+        "through"
+      ],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "type": {"const": "cylindrical_hole_pattern"},
+        "hard": {"type": "boolean"},
+        "expected_count": {"type": "integer", "minimum": 1},
+        "diameter_mm": {"type": "number", "exclusiveMinimum": 0},
+        "diameter_tolerance_mm": {"type": "number", "minimum": 0},
+        "axis": {
+          "oneOf": [
+            {"enum": ["x", "y", "z"]},
+            {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"enum": ["x", "y", "z"]}
+            }
+          ]
+        },
+        "through": {"type": "boolean"},
+        "pitch_circle_diameter_mm": {"type": "number", "exclusiveMinimum": 0},
+        "position_tolerance_mm": {"type": "number", "minimum": 0},
+        "match_tolerance_mm": {"type": "number", "minimum": 0}
+      }
+    },
+    "manual_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "criterion", "scale", "required"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "criterion": {"type": "string", "minLength": 10},
+        "scale": {"enum": ["binary", "0_to_2", "1_to_5"]},
+        "required": {"type": "boolean"}
+      }
+    }
+  }
+}

@@ -1,0 +1,5418 @@
+{
+  "benchmark_id": "cadquery_benchmark_v1",
+  "benchmark_version": "1.0.0",
+  "evaluation_schema_version": "2.0",
+  "model": "qwen3.7-max",
+  "temperature": 0.1,
+  "seeds": [
+    101,
+    202,
+    303
+  ],
+  "repair_budget": 2,
+  "conditions": [
+    "baseline",
+    "lightweight_rag",
+    "full_rag"
+  ],
+  "category_order": [
+    "ambiguous",
+    "assembly",
+    "complex_boolean",
+    "conflicting",
+    "curved_surface",
+    "holes_and_slots",
+    "out_of_distribution",
+    "primitive",
+    "revolved",
+    "thin_wall"
+  ],
+  "counts": {
+    "cases": 60,
+    "categories": 10,
+    "runs": 540,
+    "completed": 540,
+    "failed": 0,
+    "cad_runs": 486,
+    "clarification_runs": 54,
+    "clarification_responses": 54,
+    "clarification_evaluated": 0,
+    "manual_scoring_rows": 594
+  },
+  "pricing": {
+    "input_cost_per_1m_tokens": "1.25",
+    "output_cost_per_1m_tokens": "3.75",
+    "currency": "USD"
+  },
+  "overall": {
+    "run_count": 540,
+    "cad_run_count": 486,
+    "clarification_run_count": 54,
+    "clarification_response_count": 54,
+    "pass_curves": {
+      "execution": {
+        "0": {
+          "passed": 450,
+          "total": 486,
+          "rate": 0.92592593,
+          "wilson_95_low": 0.89915367,
+          "wilson_95_high": 0.9460175
+        },
+        "1": {
+          "passed": 476,
+          "total": 486,
+          "rate": 0.97942387,
+          "wilson_95_low": 0.96254202,
+          "wilson_95_high": 0.98878592
+        },
+        "2": {
+          "passed": 481,
+          "total": 486,
+          "rate": 0.98971193,
+          "wilson_95_low": 0.97614487,
+          "wilson_95_high": 0.99559784
+        }
+      },
+      "constraint": {
+        "0": {
+          "passed": 356,
+          "total": 486,
+          "rate": 0.73251029,
+          "wilson_95_low": 0.6914442,
+          "wilson_95_high": 0.76992944
+        },
+        "1": {
+          "passed": 433,
+          "total": 486,
+          "rate": 0.8909465,
+          "wilson_95_low": 0.86010662,
+          "wilson_95_high": 0.91565436
+        },
+        "2": {
+          "passed": 445,
+          "total": 486,
+          "rate": 0.91563786,
+          "wilson_95_low": 0.88755033,
+          "wilson_95_high": 0.93720608
+        }
+      },
+      "end_to_end": {
+        "0": {
+          "passed": 355,
+          "total": 486,
+          "rate": 0.73045267,
+          "wilson_95_low": 0.68930839,
+          "wilson_95_high": 0.76798229
+        },
+        "1": {
+          "passed": 432,
+          "total": 486,
+          "rate": 0.88888889,
+          "wilson_95_low": 0.85784128,
+          "wilson_95_high": 0.91383675
+        },
+        "2": {
+          "passed": 445,
+          "total": 486,
+          "rate": 0.91563786,
+          "wilson_95_low": 0.88755033,
+          "wilson_95_high": 0.93720608
+        }
+      }
+    },
+    "repairs_used": 185,
+    "runs_with_repairs": 131,
+    "execution_repairs": 60,
+    "constraint_repairs": 125,
+    "mean_repairs_per_cad_run": 0.380658,
+    "tokens": {
+      "prompt": 526243,
+      "completion": 4942912,
+      "total": 5469155
+    },
+    "cost": {
+      "total": 19.19372375,
+      "cad_only": 19.0264775,
+      "currency": "USD",
+      "per_final_cad_success": 0.04275613
+    },
+    "latency_seconds": {
+      "mean": 180.075204,
+      "median": 91.110867,
+      "p95": 602.38663
+    },
+    "transport_retries": 120,
+    "runs_with_transport_retries": 81,
+    "parameterized_code_count": 476,
+    "constraint_groups": {
+      "registered": 1413,
+      "evaluated": 1375,
+      "passed": 1351
+    }
+  },
+  "by_condition": {
+    "baseline": {
+      "run_count": 180,
+      "cad_run_count": 162,
+      "clarification_run_count": 18,
+      "clarification_response_count": 18,
+      "pass_curves": {
+        "execution": {
+          "0": {
+            "passed": 152,
+            "total": 162,
+            "rate": 0.9382716,
+            "wilson_95_low": 0.8901102,
+            "wilson_95_high": 0.96612852
+          },
+          "1": {
+            "passed": 158,
+            "total": 162,
+            "rate": 0.97530864,
+            "wilson_95_low": 0.9382397,
+            "wilson_95_high": 0.99035722
+          },
+          "2": {
+            "passed": 162,
+            "total": 162,
+            "rate": 1.0,
+            "wilson_95_low": 0.97683573,
+            "wilson_95_high": 1.0
+          }
+        },
+        "constraint": {
+          "0": {
+            "passed": 124,
+            "total": 162,
+            "rate": 0.7654321,
+            "wilson_95_low": 0.69450044,
+            "wilson_95_high": 0.82406668
+          },
+          "1": {
+            "passed": 147,
+            "total": 162,
+            "rate": 0.90740741,
+            "wilson_95_low": 0.85285574,
+            "wilson_95_high": 0.94308448
+          },
+          "2": {
+            "passed": 152,
+            "total": 162,
+            "rate": 0.9382716,
+            "wilson_95_low": 0.8901102,
+            "wilson_95_high": 0.96612852
+          }
+        },
+        "end_to_end": {
+          "0": {
+            "passed": 124,
+            "total": 162,
+            "rate": 0.7654321,
+            "wilson_95_low": 0.69450044,
+            "wilson_95_high": 0.82406668
+          },
+          "1": {
+            "passed": 147,
+            "total": 162,
+            "rate": 0.90740741,
+            "wilson_95_low": 0.85285574,
+            "wilson_95_high": 0.94308448
+          },
+          "2": {
+            "passed": 152,
+            "total": 162,
+            "rate": 0.9382716,
+            "wilson_95_low": 0.8901102,
+            "wilson_95_high": 0.96612852
+          }
+        }
+      },
+      "repairs_used": 53,
+      "runs_with_repairs": 38,
+      "execution_repairs": 19,
+      "constraint_repairs": 34,
+      "mean_repairs_per_cad_run": 0.32716,
+      "tokens": {
+        "prompt": 95507,
+        "completion": 1502665,
+        "total": 1598172
+      },
+      "cost": {
+        "total": 5.7543775,
+        "cad_only": 5.68558375,
+        "currency": "USD",
+        "per_final_cad_success": 0.03740516
+      },
+      "latency_seconds": {
+        "mean": 161.072538,
+        "median": 85.754036,
+        "p95": 565.881665
+      },
+      "transport_retries": 37,
+      "runs_with_transport_retries": 21,
+      "parameterized_code_count": 158,
+      "constraint_groups": {
+        "registered": 471,
+        "evaluated": 456,
+        "passed": 451
+      }
+    },
+    "lightweight_rag": {
+      "run_count": 180,
+      "cad_run_count": 162,
+      "clarification_run_count": 18,
+      "clarification_response_count": 18,
+      "pass_curves": {
+        "execution": {
+          "0": {
+            "passed": 155,
+            "total": 162,
+            "rate": 0.95679012,
+            "wilson_95_low": 0.9135036,
+            "wilson_95_high": 0.97891423
+          },
+          "1": {
+            "passed": 160,
+            "total": 162,
+            "rate": 0.98765432,
+            "wilson_95_low": 0.95610844,
+            "wilson_95_high": 0.99660789
+          },
+          "2": {
+            "passed": 160,
+            "total": 162,
+            "rate": 0.98765432,
+            "wilson_95_low": 0.95610844,
+            "wilson_95_high": 0.99660789
+          }
+        },
+        "constraint": {
+          "0": {
+            "passed": 124,
+            "total": 162,
+            "rate": 0.7654321,
+            "wilson_95_low": 0.69450044,
+            "wilson_95_high": 0.82406668
+          },
+          "1": {
+            "passed": 143,
+            "total": 162,
+            "rate": 0.88271605,
+            "wilson_95_low": 0.8240837,
+            "wilson_95_high": 0.92361772
+          },
+          "2": {
+            "passed": 147,
+            "total": 162,
+            "rate": 0.90740741,
+            "wilson_95_low": 0.85285574,
+            "wilson_95_high": 0.94308448
+          }
+        },
+        "end_to_end": {
+          "0": {
+            "passed": 124,
+            "total": 162,
+            "rate": 0.7654321,
+            "wilson_95_low": 0.69450044,
+            "wilson_95_high": 0.82406668
+          },
+          "1": {
+            "passed": 143,
+            "total": 162,
+            "rate": 0.88271605,
+            "wilson_95_low": 0.8240837,
+            "wilson_95_high": 0.92361772
+          },
+          "2": {
+            "passed": 147,
+            "total": 162,
+            "rate": 0.90740741,
+            "wilson_95_low": 0.85285574,
+            "wilson_95_high": 0.94308448
+          }
+        }
+      },
+      "repairs_used": 57,
+      "runs_with_repairs": 38,
+      "execution_repairs": 12,
+      "constraint_repairs": 45,
+      "mean_repairs_per_cad_run": 0.351852,
+      "tokens": {
+        "prompt": 195166,
+        "completion": 1783162,
+        "total": 1978328
+      },
+      "cost": {
+        "total": 6.930815,
+        "cad_only": 6.8837975,
+        "currency": "USD",
+        "per_final_cad_success": 0.04682855
+      },
+      "latency_seconds": {
+        "mean": 186.184378,
+        "median": 87.465215,
+        "p95": 572.276372
+      },
+      "transport_retries": 30,
+      "runs_with_transport_retries": 22,
+      "parameterized_code_count": 162,
+      "constraint_groups": {
+        "registered": 471,
+        "evaluated": 458,
+        "passed": 449
+      }
+    },
+    "full_rag": {
+      "run_count": 180,
+      "cad_run_count": 162,
+      "clarification_run_count": 18,
+      "clarification_response_count": 18,
+      "pass_curves": {
+        "execution": {
+          "0": {
+            "passed": 143,
+            "total": 162,
+            "rate": 0.88271605,
+            "wilson_95_low": 0.8240837,
+            "wilson_95_high": 0.92361772
+          },
+          "1": {
+            "passed": 158,
+            "total": 162,
+            "rate": 0.97530864,
+            "wilson_95_low": 0.9382397,
+            "wilson_95_high": 0.99035722
+          },
+          "2": {
+            "passed": 159,
+            "total": 162,
+            "rate": 0.98148148,
+            "wilson_95_low": 0.94697414,
+            "wilson_95_high": 0.99368248
+          }
+        },
+        "constraint": {
+          "0": {
+            "passed": 108,
+            "total": 162,
+            "rate": 0.66666667,
+            "wilson_95_low": 0.59095527,
+            "wilson_95_high": 0.73465664
+          },
+          "1": {
+            "passed": 143,
+            "total": 162,
+            "rate": 0.88271605,
+            "wilson_95_low": 0.8240837,
+            "wilson_95_high": 0.92361772
+          },
+          "2": {
+            "passed": 146,
+            "total": 162,
+            "rate": 0.90123457,
+            "wilson_95_low": 0.84559099,
+            "wilson_95_high": 0.93828953
+          }
+        },
+        "end_to_end": {
+          "0": {
+            "passed": 107,
+            "total": 162,
+            "rate": 0.66049383,
+            "wilson_95_low": 0.58460812,
+            "wilson_95_high": 0.72894409
+          },
+          "1": {
+            "passed": 142,
+            "total": 162,
+            "rate": 0.87654321,
+            "wilson_95_low": 0.81699955,
+            "wilson_95_high": 0.91864217
+          },
+          "2": {
+            "passed": 146,
+            "total": 162,
+            "rate": 0.90123457,
+            "wilson_95_low": 0.84559099,
+            "wilson_95_high": 0.93828953
+          }
+        }
+      },
+      "repairs_used": 75,
+      "runs_with_repairs": 55,
+      "execution_repairs": 29,
+      "constraint_repairs": 46,
+      "mean_repairs_per_cad_run": 0.462963,
+      "tokens": {
+        "prompt": 235570,
+        "completion": 1657085,
+        "total": 1892655
+      },
+      "cost": {
+        "total": 6.50853125,
+        "cad_only": 6.45709625,
+        "currency": "USD",
+        "per_final_cad_success": 0.04422669
+      },
+      "latency_seconds": {
+        "mean": 192.968695,
+        "median": 98.043623,
+        "p95": 633.830852
+      },
+      "transport_retries": 53,
+      "runs_with_transport_retries": 38,
+      "parameterized_code_count": 156,
+      "constraint_groups": {
+        "registered": 471,
+        "evaluated": 461,
+        "passed": 451
+      }
+    }
+  },
+  "by_seed": {
+    "101": {
+      "baseline": {
+        "run_count": 60,
+        "cad_run_count": 54,
+        "clarification_run_count": 6,
+        "clarification_response_count": 6,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 51,
+              "total": 54,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.84892549,
+              "wilson_95_high": 0.98092708
+            },
+            "1": {
+              "passed": 52,
+              "total": 54,
+              "rate": 0.96296296,
+              "wilson_95_low": 0.87464591,
+              "wilson_95_high": 0.98978385
+            },
+            "2": {
+              "passed": 54,
+              "total": 54,
+              "rate": 1.0,
+              "wilson_95_low": 0.93358413,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 42,
+              "total": 54,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.65061073,
+              "wilson_95_high": 0.86804712
+            },
+            "1": {
+              "passed": 49,
+              "total": 54,
+              "rate": 0.90740741,
+              "wilson_95_low": 0.80089872,
+              "wilson_95_high": 0.95979946
+            },
+            "2": {
+              "passed": 51,
+              "total": 54,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.84892549,
+              "wilson_95_high": 0.98092708
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 42,
+              "total": 54,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.65061073,
+              "wilson_95_high": 0.86804712
+            },
+            "1": {
+              "passed": 49,
+              "total": 54,
+              "rate": 0.90740741,
+              "wilson_95_low": 0.80089872,
+              "wilson_95_high": 0.95979946
+            },
+            "2": {
+              "passed": 51,
+              "total": 54,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.84892549,
+              "wilson_95_high": 0.98092708
+            }
+          }
+        },
+        "repairs_used": 17,
+        "runs_with_repairs": 12,
+        "execution_repairs": 5,
+        "constraint_repairs": 12,
+        "mean_repairs_per_cad_run": 0.314815,
+        "tokens": {
+          "prompt": 33289,
+          "completion": 501263,
+          "total": 534552
+        },
+        "cost": {
+          "total": 1.9213475,
+          "cad_only": 1.89947125,
+          "currency": "USD",
+          "per_final_cad_success": 0.03724453
+        },
+        "latency_seconds": {
+          "mean": 168.966985,
+          "median": 103.865529,
+          "p95": 572.719645
+        },
+        "transport_retries": 16,
+        "runs_with_transport_retries": 9,
+        "parameterized_code_count": 52,
+        "constraint_groups": {
+          "registered": 157,
+          "evaluated": 151,
+          "passed": 150
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 60,
+        "cad_run_count": 54,
+        "clarification_run_count": 6,
+        "clarification_response_count": 6,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 52,
+              "total": 54,
+              "rate": 0.96296296,
+              "wilson_95_low": 0.87464591,
+              "wilson_95_high": 0.98978385
+            },
+            "1": {
+              "passed": 54,
+              "total": 54,
+              "rate": 1.0,
+              "wilson_95_low": 0.93358413,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 54,
+              "total": 54,
+              "rate": 1.0,
+              "wilson_95_low": 0.93358413,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 41,
+              "total": 54,
+              "rate": 0.75925926,
+              "wilson_95_low": 0.63052221,
+              "wilson_95_high": 0.85355845
+            },
+            "1": {
+              "passed": 48,
+              "total": 54,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.77805051,
+              "wilson_95_high": 0.94807048
+            },
+            "2": {
+              "passed": 49,
+              "total": 54,
+              "rate": 0.90740741,
+              "wilson_95_low": 0.80089872,
+              "wilson_95_high": 0.95979946
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 41,
+              "total": 54,
+              "rate": 0.75925926,
+              "wilson_95_low": 0.63052221,
+              "wilson_95_high": 0.85355845
+            },
+            "1": {
+              "passed": 48,
+              "total": 54,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.77805051,
+              "wilson_95_high": 0.94807048
+            },
+            "2": {
+              "passed": 49,
+              "total": 54,
+              "rate": 0.90740741,
+              "wilson_95_low": 0.80089872,
+              "wilson_95_high": 0.95979946
+            }
+          }
+        },
+        "repairs_used": 19,
+        "runs_with_repairs": 13,
+        "execution_repairs": 4,
+        "constraint_repairs": 15,
+        "mean_repairs_per_cad_run": 0.351852,
+        "tokens": {
+          "prompt": 64838,
+          "completion": 579346,
+          "total": 644184
+        },
+        "cost": {
+          "total": 2.253595,
+          "cad_only": 2.23832875,
+          "currency": "USD",
+          "per_final_cad_success": 0.04568018
+        },
+        "latency_seconds": {
+          "mean": 193.596515,
+          "median": 78.898404,
+          "p95": 717.677768
+        },
+        "transport_retries": 10,
+        "runs_with_transport_retries": 7,
+        "parameterized_code_count": 54,
+        "constraint_groups": {
+          "registered": 157,
+          "evaluated": 153,
+          "passed": 150
+        }
+      },
+      "full_rag": {
+        "run_count": 60,
+        "cad_run_count": 54,
+        "clarification_run_count": 6,
+        "clarification_response_count": 6,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 46,
+              "total": 54,
+              "rate": 0.85185185,
+              "wilson_95_low": 0.73399633,
+              "wilson_95_high": 0.92297029
+            },
+            "1": {
+              "passed": 52,
+              "total": 54,
+              "rate": 0.96296296,
+              "wilson_95_low": 0.87464591,
+              "wilson_95_high": 0.98978385
+            },
+            "2": {
+              "passed": 52,
+              "total": 54,
+              "rate": 0.96296296,
+              "wilson_95_low": 0.87464591,
+              "wilson_95_high": 0.98978385
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 38,
+              "total": 54,
+              "rate": 0.7037037,
+              "wilson_95_low": 0.57172175,
+              "wilson_95_high": 0.80862734
+            },
+            "1": {
+              "passed": 49,
+              "total": 54,
+              "rate": 0.90740741,
+              "wilson_95_low": 0.80089872,
+              "wilson_95_high": 0.95979946
+            },
+            "2": {
+              "passed": 50,
+              "total": 54,
+              "rate": 0.92592593,
+              "wilson_95_low": 0.82445643,
+              "wilson_95_high": 0.97081894
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 38,
+              "total": 54,
+              "rate": 0.7037037,
+              "wilson_95_low": 0.57172175,
+              "wilson_95_high": 0.80862734
+            },
+            "1": {
+              "passed": 49,
+              "total": 54,
+              "rate": 0.90740741,
+              "wilson_95_low": 0.80089872,
+              "wilson_95_high": 0.95979946
+            },
+            "2": {
+              "passed": 50,
+              "total": 54,
+              "rate": 0.92592593,
+              "wilson_95_low": 0.82445643,
+              "wilson_95_high": 0.97081894
+            }
+          }
+        },
+        "repairs_used": 21,
+        "runs_with_repairs": 16,
+        "execution_repairs": 11,
+        "constraint_repairs": 10,
+        "mean_repairs_per_cad_run": 0.388889,
+        "tokens": {
+          "prompt": 70833,
+          "completion": 528823,
+          "total": 599656
+        },
+        "cost": {
+          "total": 2.0716275,
+          "cad_only": 2.05381375,
+          "currency": "USD",
+          "per_final_cad_success": 0.04107627
+        },
+        "latency_seconds": {
+          "mean": 197.237231,
+          "median": 96.20903,
+          "p95": 687.045985
+        },
+        "transport_retries": 17,
+        "runs_with_transport_retries": 9,
+        "parameterized_code_count": 52,
+        "constraint_groups": {
+          "registered": 157,
+          "evaluated": 151,
+          "passed": 150
+        }
+      }
+    },
+    "202": {
+      "baseline": {
+        "run_count": 60,
+        "cad_run_count": 54,
+        "clarification_run_count": 6,
+        "clarification_response_count": 6,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 49,
+              "total": 54,
+              "rate": 0.90740741,
+              "wilson_95_low": 0.80089872,
+              "wilson_95_high": 0.95979946
+            },
+            "1": {
+              "passed": 53,
+              "total": 54,
+              "rate": 0.98148148,
+              "wilson_95_low": 0.90228335,
+              "wilson_95_high": 0.9967236
+            },
+            "2": {
+              "passed": 54,
+              "total": 54,
+              "rate": 1.0,
+              "wilson_95_low": 0.93358413,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 40,
+              "total": 54,
+              "rate": 0.74074074,
+              "wilson_95_low": 0.61068855,
+              "wilson_95_high": 0.83881492
+            },
+            "1": {
+              "passed": 48,
+              "total": 54,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.77805051,
+              "wilson_95_high": 0.94807048
+            },
+            "2": {
+              "passed": 50,
+              "total": 54,
+              "rate": 0.92592593,
+              "wilson_95_low": 0.82445643,
+              "wilson_95_high": 0.97081894
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 40,
+              "total": 54,
+              "rate": 0.74074074,
+              "wilson_95_low": 0.61068855,
+              "wilson_95_high": 0.83881492
+            },
+            "1": {
+              "passed": 48,
+              "total": 54,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.77805051,
+              "wilson_95_high": 0.94807048
+            },
+            "2": {
+              "passed": 50,
+              "total": 54,
+              "rate": 0.92592593,
+              "wilson_95_low": 0.82445643,
+              "wilson_95_high": 0.97081894
+            }
+          }
+        },
+        "repairs_used": 20,
+        "runs_with_repairs": 14,
+        "execution_repairs": 9,
+        "constraint_repairs": 11,
+        "mean_repairs_per_cad_run": 0.37037,
+        "tokens": {
+          "prompt": 33638,
+          "completion": 591562,
+          "total": 625200
+        },
+        "cost": {
+          "total": 2.260405,
+          "cad_only": 2.236125,
+          "currency": "USD",
+          "per_final_cad_success": 0.0447225
+        },
+        "latency_seconds": {
+          "mean": 181.730871,
+          "median": 84.984049,
+          "p95": 694.570396
+        },
+        "transport_retries": 10,
+        "runs_with_transport_retries": 7,
+        "parameterized_code_count": 52,
+        "constraint_groups": {
+          "registered": 157,
+          "evaluated": 155,
+          "passed": 152
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 60,
+        "cad_run_count": 54,
+        "clarification_run_count": 6,
+        "clarification_response_count": 6,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 50,
+              "total": 54,
+              "rate": 0.92592593,
+              "wilson_95_low": 0.82445643,
+              "wilson_95_high": 0.97081894
+            },
+            "1": {
+              "passed": 52,
+              "total": 54,
+              "rate": 0.96296296,
+              "wilson_95_low": 0.87464591,
+              "wilson_95_high": 0.98978385
+            },
+            "2": {
+              "passed": 52,
+              "total": 54,
+              "rate": 0.96296296,
+              "wilson_95_low": 0.87464591,
+              "wilson_95_high": 0.98978385
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 38,
+              "total": 54,
+              "rate": 0.7037037,
+              "wilson_95_low": 0.57172175,
+              "wilson_95_high": 0.80862734
+            },
+            "1": {
+              "passed": 46,
+              "total": 54,
+              "rate": 0.85185185,
+              "wilson_95_low": 0.73399633,
+              "wilson_95_high": 0.92297029
+            },
+            "2": {
+              "passed": 47,
+              "total": 54,
+              "rate": 0.87037037,
+              "wilson_95_low": 0.75578019,
+              "wilson_95_high": 0.93576361
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 38,
+              "total": 54,
+              "rate": 0.7037037,
+              "wilson_95_low": 0.57172175,
+              "wilson_95_high": 0.80862734
+            },
+            "1": {
+              "passed": 46,
+              "total": 54,
+              "rate": 0.85185185,
+              "wilson_95_low": 0.73399633,
+              "wilson_95_high": 0.92297029
+            },
+            "2": {
+              "passed": 47,
+              "total": 54,
+              "rate": 0.87037037,
+              "wilson_95_low": 0.75578019,
+              "wilson_95_high": 0.93576361
+            }
+          }
+        },
+        "repairs_used": 24,
+        "runs_with_repairs": 16,
+        "execution_repairs": 6,
+        "constraint_repairs": 18,
+        "mean_repairs_per_cad_run": 0.444444,
+        "tokens": {
+          "prompt": 72122,
+          "completion": 561095,
+          "total": 633217
+        },
+        "cost": {
+          "total": 2.19425875,
+          "cad_only": 2.1774175,
+          "currency": "USD",
+          "per_final_cad_success": 0.04632803
+        },
+        "latency_seconds": {
+          "mean": 178.800503,
+          "median": 129.563682,
+          "p95": 419.357055
+        },
+        "transport_retries": 13,
+        "runs_with_transport_retries": 10,
+        "parameterized_code_count": 54,
+        "constraint_groups": {
+          "registered": 157,
+          "evaluated": 151,
+          "passed": 147
+        }
+      },
+      "full_rag": {
+        "run_count": 60,
+        "cad_run_count": 54,
+        "clarification_run_count": 6,
+        "clarification_response_count": 6,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 50,
+              "total": 54,
+              "rate": 0.92592593,
+              "wilson_95_low": 0.82445643,
+              "wilson_95_high": 0.97081894
+            },
+            "1": {
+              "passed": 54,
+              "total": 54,
+              "rate": 1.0,
+              "wilson_95_low": 0.93358413,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 54,
+              "total": 54,
+              "rate": 1.0,
+              "wilson_95_low": 0.93358413,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 39,
+              "total": 54,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.59109304,
+              "wilson_95_high": 0.82383325
+            },
+            "1": {
+              "passed": 48,
+              "total": 54,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.77805051,
+              "wilson_95_high": 0.94807048
+            },
+            "2": {
+              "passed": 49,
+              "total": 54,
+              "rate": 0.90740741,
+              "wilson_95_low": 0.80089872,
+              "wilson_95_high": 0.95979946
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 39,
+              "total": 54,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.59109304,
+              "wilson_95_high": 0.82383325
+            },
+            "1": {
+              "passed": 48,
+              "total": 54,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.77805051,
+              "wilson_95_high": 0.94807048
+            },
+            "2": {
+              "passed": 49,
+              "total": 54,
+              "rate": 0.90740741,
+              "wilson_95_low": 0.80089872,
+              "wilson_95_high": 0.95979946
+            }
+          }
+        },
+        "repairs_used": 21,
+        "runs_with_repairs": 15,
+        "execution_repairs": 5,
+        "constraint_repairs": 16,
+        "mean_repairs_per_cad_run": 0.388889,
+        "tokens": {
+          "prompt": 75320,
+          "completion": 501686,
+          "total": 577006
+        },
+        "cost": {
+          "total": 1.9754725,
+          "cad_only": 1.95912875,
+          "currency": "USD",
+          "per_final_cad_success": 0.03998222
+        },
+        "latency_seconds": {
+          "mean": 176.374821,
+          "median": 74.876313,
+          "p95": 594.804316
+        },
+        "transport_retries": 21,
+        "runs_with_transport_retries": 15,
+        "parameterized_code_count": 52,
+        "constraint_groups": {
+          "registered": 157,
+          "evaluated": 157,
+          "passed": 152
+        }
+      }
+    },
+    "303": {
+      "baseline": {
+        "run_count": 60,
+        "cad_run_count": 54,
+        "clarification_run_count": 6,
+        "clarification_response_count": 6,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 52,
+              "total": 54,
+              "rate": 0.96296296,
+              "wilson_95_low": 0.87464591,
+              "wilson_95_high": 0.98978385
+            },
+            "1": {
+              "passed": 53,
+              "total": 54,
+              "rate": 0.98148148,
+              "wilson_95_low": 0.90228335,
+              "wilson_95_high": 0.9967236
+            },
+            "2": {
+              "passed": 54,
+              "total": 54,
+              "rate": 1.0,
+              "wilson_95_low": 0.93358413,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 42,
+              "total": 54,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.65061073,
+              "wilson_95_high": 0.86804712
+            },
+            "1": {
+              "passed": 50,
+              "total": 54,
+              "rate": 0.92592593,
+              "wilson_95_low": 0.82445643,
+              "wilson_95_high": 0.97081894
+            },
+            "2": {
+              "passed": 51,
+              "total": 54,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.84892549,
+              "wilson_95_high": 0.98092708
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 42,
+              "total": 54,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.65061073,
+              "wilson_95_high": 0.86804712
+            },
+            "1": {
+              "passed": 50,
+              "total": 54,
+              "rate": 0.92592593,
+              "wilson_95_low": 0.82445643,
+              "wilson_95_high": 0.97081894
+            },
+            "2": {
+              "passed": 51,
+              "total": 54,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.84892549,
+              "wilson_95_high": 0.98092708
+            }
+          }
+        },
+        "repairs_used": 16,
+        "runs_with_repairs": 12,
+        "execution_repairs": 5,
+        "constraint_repairs": 11,
+        "mean_repairs_per_cad_run": 0.296296,
+        "tokens": {
+          "prompt": 28580,
+          "completion": 409840,
+          "total": 438420
+        },
+        "cost": {
+          "total": 1.572625,
+          "cad_only": 1.5499875,
+          "currency": "USD",
+          "per_final_cad_success": 0.03039191
+        },
+        "latency_seconds": {
+          "mean": 132.519759,
+          "median": 70.83063,
+          "p95": 420.777147
+        },
+        "transport_retries": 11,
+        "runs_with_transport_retries": 5,
+        "parameterized_code_count": 54,
+        "constraint_groups": {
+          "registered": 157,
+          "evaluated": 150,
+          "passed": 149
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 60,
+        "cad_run_count": 54,
+        "clarification_run_count": 6,
+        "clarification_response_count": 6,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 53,
+              "total": 54,
+              "rate": 0.98148148,
+              "wilson_95_low": 0.90228335,
+              "wilson_95_high": 0.9967236
+            },
+            "1": {
+              "passed": 54,
+              "total": 54,
+              "rate": 1.0,
+              "wilson_95_low": 0.93358413,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 54,
+              "total": 54,
+              "rate": 1.0,
+              "wilson_95_low": 0.93358413,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 45,
+              "total": 54,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.71263232,
+              "wilson_95_high": 0.9097571
+            },
+            "1": {
+              "passed": 49,
+              "total": 54,
+              "rate": 0.90740741,
+              "wilson_95_low": 0.80089872,
+              "wilson_95_high": 0.95979946
+            },
+            "2": {
+              "passed": 51,
+              "total": 54,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.84892549,
+              "wilson_95_high": 0.98092708
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 45,
+              "total": 54,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.71263232,
+              "wilson_95_high": 0.9097571
+            },
+            "1": {
+              "passed": 49,
+              "total": 54,
+              "rate": 0.90740741,
+              "wilson_95_low": 0.80089872,
+              "wilson_95_high": 0.95979946
+            },
+            "2": {
+              "passed": 51,
+              "total": 54,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.84892549,
+              "wilson_95_high": 0.98092708
+            }
+          }
+        },
+        "repairs_used": 14,
+        "runs_with_repairs": 9,
+        "execution_repairs": 2,
+        "constraint_repairs": 12,
+        "mean_repairs_per_cad_run": 0.259259,
+        "tokens": {
+          "prompt": 58206,
+          "completion": 642721,
+          "total": 700927
+        },
+        "cost": {
+          "total": 2.48296125,
+          "cad_only": 2.46805125,
+          "currency": "USD",
+          "per_final_cad_success": 0.04839316
+        },
+        "latency_seconds": {
+          "mean": 186.156116,
+          "median": 82.299974,
+          "p95": 475.149074
+        },
+        "transport_retries": 7,
+        "runs_with_transport_retries": 5,
+        "parameterized_code_count": 54,
+        "constraint_groups": {
+          "registered": 157,
+          "evaluated": 154,
+          "passed": 152
+        }
+      },
+      "full_rag": {
+        "run_count": 60,
+        "cad_run_count": 54,
+        "clarification_run_count": 6,
+        "clarification_response_count": 6,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 47,
+              "total": 54,
+              "rate": 0.87037037,
+              "wilson_95_low": 0.75578019,
+              "wilson_95_high": 0.93576361
+            },
+            "1": {
+              "passed": 52,
+              "total": 54,
+              "rate": 0.96296296,
+              "wilson_95_low": 0.87464591,
+              "wilson_95_high": 0.98978385
+            },
+            "2": {
+              "passed": 53,
+              "total": 54,
+              "rate": 0.98148148,
+              "wilson_95_low": 0.90228335,
+              "wilson_95_high": 0.9967236
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 31,
+              "total": 54,
+              "rate": 0.57407407,
+              "wilson_95_low": 0.44162498,
+              "wilson_95_high": 0.69668378
+            },
+            "1": {
+              "passed": 46,
+              "total": 54,
+              "rate": 0.85185185,
+              "wilson_95_low": 0.73399633,
+              "wilson_95_high": 0.92297029
+            },
+            "2": {
+              "passed": 47,
+              "total": 54,
+              "rate": 0.87037037,
+              "wilson_95_low": 0.75578019,
+              "wilson_95_high": 0.93576361
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 30,
+              "total": 54,
+              "rate": 0.55555556,
+              "wilson_95_low": 0.42375414,
+              "wilson_95_high": 0.67997743
+            },
+            "1": {
+              "passed": 45,
+              "total": 54,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.71263232,
+              "wilson_95_high": 0.9097571
+            },
+            "2": {
+              "passed": 47,
+              "total": 54,
+              "rate": 0.87037037,
+              "wilson_95_low": 0.75578019,
+              "wilson_95_high": 0.93576361
+            }
+          }
+        },
+        "repairs_used": 33,
+        "runs_with_repairs": 24,
+        "execution_repairs": 13,
+        "constraint_repairs": 20,
+        "mean_repairs_per_cad_run": 0.611111,
+        "tokens": {
+          "prompt": 89417,
+          "completion": 626576,
+          "total": 715993
+        },
+        "cost": {
+          "total": 2.46143125,
+          "cad_only": 2.44415375,
+          "currency": "USD",
+          "per_final_cad_success": 0.05200327
+        },
+        "latency_seconds": {
+          "mean": 205.294034,
+          "median": 127.352587,
+          "p95": 633.830852
+        },
+        "transport_retries": 15,
+        "runs_with_transport_retries": 14,
+        "parameterized_code_count": 52,
+        "constraint_groups": {
+          "registered": 157,
+          "evaluated": 153,
+          "passed": 149
+        }
+      }
+    }
+  },
+  "by_category": {
+    "ambiguous": {
+      "baseline": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            },
+            "1": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            },
+            "1": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          }
+        },
+        "repairs_used": 9,
+        "runs_with_repairs": 6,
+        "execution_repairs": 2,
+        "constraint_repairs": 7,
+        "mean_repairs_per_cad_run": 0.5,
+        "tokens": {
+          "prompt": 15723,
+          "completion": 372832,
+          "total": 388555
+        },
+        "cost": {
+          "total": 1.41777375,
+          "cad_only": 1.41777375,
+          "currency": "USD",
+          "per_final_cad_success": 0.07876521
+        },
+        "latency_seconds": {
+          "mean": 398.065912,
+          "median": 347.377379,
+          "p95": 923.46379
+        },
+        "transport_retries": 9,
+        "runs_with_transport_retries": 5,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 30,
+          "evaluated": 30,
+          "passed": 30
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          }
+        },
+        "repairs_used": 4,
+        "runs_with_repairs": 3,
+        "execution_repairs": 2,
+        "constraint_repairs": 2,
+        "mean_repairs_per_cad_run": 0.222222,
+        "tokens": {
+          "prompt": 17798,
+          "completion": 319609,
+          "total": 337407
+        },
+        "cost": {
+          "total": 1.22078125,
+          "cad_only": 1.22078125,
+          "currency": "USD",
+          "per_final_cad_success": 0.07181066
+        },
+        "latency_seconds": {
+          "mean": 327.909973,
+          "median": 289.951372,
+          "p95": 803.748903
+        },
+        "transport_retries": 2,
+        "runs_with_transport_retries": 2,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 30,
+          "evaluated": 28,
+          "passed": 28
+        }
+      },
+      "full_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 10,
+              "total": 18,
+              "rate": 0.55555556,
+              "wilson_95_low": 0.33716069,
+              "wilson_95_high": 0.75440769
+            },
+            "1": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "2": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 10,
+              "total": 18,
+              "rate": 0.55555556,
+              "wilson_95_low": 0.33716069,
+              "wilson_95_high": 0.75440769
+            },
+            "1": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "2": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            }
+          }
+        },
+        "repairs_used": 10,
+        "runs_with_repairs": 8,
+        "execution_repairs": 7,
+        "constraint_repairs": 3,
+        "mean_repairs_per_cad_run": 0.555556,
+        "tokens": {
+          "prompt": 26030,
+          "completion": 377723,
+          "total": 403753
+        },
+        "cost": {
+          "total": 1.44899875,
+          "cad_only": 1.44899875,
+          "currency": "USD",
+          "per_final_cad_success": 0.09056242
+        },
+        "latency_seconds": {
+          "mean": 426.728842,
+          "median": 403.805712,
+          "p95": 1281.682212
+        },
+        "transport_retries": 6,
+        "runs_with_transport_retries": 4,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 30,
+          "evaluated": 28,
+          "passed": 27
+        }
+      }
+    },
+    "assembly": {
+      "baseline": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          }
+        },
+        "repairs_used": 1,
+        "runs_with_repairs": 1,
+        "execution_repairs": 0,
+        "constraint_repairs": 1,
+        "mean_repairs_per_cad_run": 0.055556,
+        "tokens": {
+          "prompt": 5903,
+          "completion": 176841,
+          "total": 182744
+        },
+        "cost": {
+          "total": 0.6705325,
+          "cad_only": 0.6705325,
+          "currency": "USD",
+          "per_final_cad_success": 0.03725181
+        },
+        "latency_seconds": {
+          "mean": 174.679213,
+          "median": 86.339817,
+          "p95": 768.210582
+        },
+        "transport_retries": 2,
+        "runs_with_transport_retries": 2,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 48,
+          "evaluated": 48,
+          "passed": 48
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          }
+        },
+        "repairs_used": 2,
+        "runs_with_repairs": 2,
+        "execution_repairs": 0,
+        "constraint_repairs": 2,
+        "mean_repairs_per_cad_run": 0.111111,
+        "tokens": {
+          "prompt": 15273,
+          "completion": 134885,
+          "total": 150158
+        },
+        "cost": {
+          "total": 0.52491,
+          "cad_only": 0.52491,
+          "currency": "USD",
+          "per_final_cad_success": 0.02916167
+        },
+        "latency_seconds": {
+          "mean": 127.917738,
+          "median": 79.453622,
+          "p95": 340.402746
+        },
+        "transport_retries": 0,
+        "runs_with_transport_retries": 0,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 48,
+          "evaluated": 48,
+          "passed": 48
+        }
+      },
+      "full_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          }
+        },
+        "repairs_used": 6,
+        "runs_with_repairs": 5,
+        "execution_repairs": 2,
+        "constraint_repairs": 4,
+        "mean_repairs_per_cad_run": 0.333333,
+        "tokens": {
+          "prompt": 26982,
+          "completion": 156354,
+          "total": 183336
+        },
+        "cost": {
+          "total": 0.620055,
+          "cad_only": 0.620055,
+          "currency": "USD",
+          "per_final_cad_success": 0.0344475
+        },
+        "latency_seconds": {
+          "mean": 173.921129,
+          "median": 142.07512,
+          "p95": 533.513259
+        },
+        "transport_retries": 4,
+        "runs_with_transport_retries": 4,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 48,
+          "evaluated": 48,
+          "passed": 48
+        }
+      }
+    },
+    "complex_boolean": {
+      "baseline": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 7,
+              "total": 18,
+              "rate": 0.38888889,
+              "wilson_95_low": 0.20304992,
+              "wilson_95_high": 0.61381331
+            },
+            "1": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 7,
+              "total": 18,
+              "rate": 0.38888889,
+              "wilson_95_low": 0.20304992,
+              "wilson_95_high": 0.61381331
+            },
+            "1": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          }
+        },
+        "repairs_used": 14,
+        "runs_with_repairs": 11,
+        "execution_repairs": 2,
+        "constraint_repairs": 12,
+        "mean_repairs_per_cad_run": 0.777778,
+        "tokens": {
+          "prompt": 18269,
+          "completion": 193293,
+          "total": 211562
+        },
+        "cost": {
+          "total": 0.747685,
+          "cad_only": 0.747685,
+          "currency": "USD",
+          "per_final_cad_success": 0.04984567
+        },
+        "latency_seconds": {
+          "mean": 190.563123,
+          "median": 144.524544,
+          "p95": 469.85947
+        },
+        "transport_retries": 0,
+        "runs_with_transport_retries": 0,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 60,
+          "evaluated": 52,
+          "passed": 51
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 10,
+              "total": 18,
+              "rate": 0.55555556,
+              "wilson_95_low": 0.33716069,
+              "wilson_95_high": 0.75440769
+            },
+            "1": {
+              "passed": 11,
+              "total": 18,
+              "rate": 0.61111111,
+              "wilson_95_low": 0.38618669,
+              "wilson_95_high": 0.79695008
+            },
+            "2": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 10,
+              "total": 18,
+              "rate": 0.55555556,
+              "wilson_95_low": 0.33716069,
+              "wilson_95_high": 0.75440769
+            },
+            "1": {
+              "passed": 11,
+              "total": 18,
+              "rate": 0.61111111,
+              "wilson_95_low": 0.38618669,
+              "wilson_95_high": 0.79695008
+            },
+            "2": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            }
+          }
+        },
+        "repairs_used": 15,
+        "runs_with_repairs": 8,
+        "execution_repairs": 1,
+        "constraint_repairs": 14,
+        "mean_repairs_per_cad_run": 0.833333,
+        "tokens": {
+          "prompt": 33459,
+          "completion": 313415,
+          "total": 346874
+        },
+        "cost": {
+          "total": 1.21713,
+          "cad_only": 1.21713,
+          "currency": "USD",
+          "per_final_cad_success": 0.1014275
+        },
+        "latency_seconds": {
+          "mean": 302.267531,
+          "median": 69.335278,
+          "p95": 2038.500235
+        },
+        "transport_retries": 6,
+        "runs_with_transport_retries": 3,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 60,
+          "evaluated": 60,
+          "passed": 54
+        }
+      },
+      "full_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            },
+            "1": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "2": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            },
+            "1": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "2": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            }
+          }
+        },
+        "repairs_used": 11,
+        "runs_with_repairs": 6,
+        "execution_repairs": 2,
+        "constraint_repairs": 9,
+        "mean_repairs_per_cad_run": 0.611111,
+        "tokens": {
+          "prompt": 33499,
+          "completion": 190717,
+          "total": 224216
+        },
+        "cost": {
+          "total": 0.7570625,
+          "cad_only": 0.7570625,
+          "currency": "USD",
+          "per_final_cad_success": 0.05407589
+        },
+        "latency_seconds": {
+          "mean": 198.22239,
+          "median": 109.685215,
+          "p95": 765.724141
+        },
+        "transport_retries": 5,
+        "runs_with_transport_retries": 4,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 60,
+          "evaluated": 60,
+          "passed": 56
+        }
+      }
+    },
+    "conflicting": {
+      "baseline": {
+        "run_count": 18,
+        "cad_run_count": 0,
+        "clarification_run_count": 18,
+        "clarification_response_count": 18,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "1": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "2": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "1": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "2": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "1": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "2": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            }
+          }
+        },
+        "repairs_used": 0,
+        "runs_with_repairs": 0,
+        "execution_repairs": 0,
+        "constraint_repairs": 0,
+        "mean_repairs_per_cad_run": null,
+        "tokens": {
+          "prompt": 2832,
+          "completion": 17401,
+          "total": 20233
+        },
+        "cost": {
+          "total": 0.06879375,
+          "cad_only": 0,
+          "currency": "USD",
+          "per_final_cad_success": null
+        },
+        "latency_seconds": {
+          "mean": 26.838161,
+          "median": 19.567784,
+          "p95": 160.342237
+        },
+        "transport_retries": 1,
+        "runs_with_transport_retries": 1,
+        "parameterized_code_count": 0,
+        "constraint_groups": {
+          "registered": 0,
+          "evaluated": 0,
+          "passed": 0
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 18,
+        "cad_run_count": 0,
+        "clarification_run_count": 18,
+        "clarification_response_count": 18,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "1": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "2": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "1": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "2": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "1": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "2": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            }
+          }
+        },
+        "repairs_used": 0,
+        "runs_with_repairs": 0,
+        "execution_repairs": 0,
+        "constraint_repairs": 0,
+        "mean_repairs_per_cad_run": null,
+        "tokens": {
+          "prompt": 10431,
+          "completion": 9061,
+          "total": 19492
+        },
+        "cost": {
+          "total": 0.0470175,
+          "cad_only": 0,
+          "currency": "USD",
+          "per_final_cad_success": null
+        },
+        "latency_seconds": {
+          "mean": 29.337673,
+          "median": 11.550115,
+          "p95": 147.553763
+        },
+        "transport_retries": 6,
+        "runs_with_transport_retries": 4,
+        "parameterized_code_count": 0,
+        "constraint_groups": {
+          "registered": 0,
+          "evaluated": 0,
+          "passed": 0
+        }
+      },
+      "full_rag": {
+        "run_count": 18,
+        "cad_run_count": 0,
+        "clarification_run_count": 18,
+        "clarification_response_count": 18,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "1": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "2": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "1": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "2": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "1": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            },
+            "2": {
+              "passed": 0,
+              "total": 0,
+              "rate": null,
+              "wilson_95_low": null,
+              "wilson_95_high": null
+            }
+          }
+        },
+        "repairs_used": 0,
+        "runs_with_repairs": 0,
+        "execution_repairs": 0,
+        "constraint_repairs": 0,
+        "mean_repairs_per_cad_run": null,
+        "tokens": {
+          "prompt": 13584,
+          "completion": 9188,
+          "total": 22772
+        },
+        "cost": {
+          "total": 0.051435,
+          "cad_only": 0,
+          "currency": "USD",
+          "per_final_cad_success": null
+        },
+        "latency_seconds": {
+          "mean": 20.57105,
+          "median": 11.607007,
+          "p95": 141.827443
+        },
+        "transport_retries": 4,
+        "runs_with_transport_retries": 3,
+        "parameterized_code_count": 0,
+        "constraint_groups": {
+          "registered": 0,
+          "evaluated": 0,
+          "passed": 0
+        }
+      }
+    },
+    "curved_surface": {
+      "baseline": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          }
+        },
+        "repairs_used": 6,
+        "runs_with_repairs": 5,
+        "execution_repairs": 3,
+        "constraint_repairs": 3,
+        "mean_repairs_per_cad_run": 0.333333,
+        "tokens": {
+          "prompt": 9576,
+          "completion": 216105,
+          "total": 225681
+        },
+        "cost": {
+          "total": 0.82236375,
+          "cad_only": 0.82236375,
+          "currency": "USD",
+          "per_final_cad_success": 0.04837434
+        },
+        "latency_seconds": {
+          "mean": 224.315617,
+          "median": 181.211695,
+          "p95": 694.570396
+        },
+        "transport_retries": 5,
+        "runs_with_transport_retries": 3,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 45,
+          "evaluated": 45,
+          "passed": 44
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          }
+        },
+        "repairs_used": 7,
+        "runs_with_repairs": 6,
+        "execution_repairs": 3,
+        "constraint_repairs": 4,
+        "mean_repairs_per_cad_run": 0.388889,
+        "tokens": {
+          "prompt": 22182,
+          "completion": 267984,
+          "total": 290166
+        },
+        "cost": {
+          "total": 1.0326675,
+          "cad_only": 1.0326675,
+          "currency": "USD",
+          "per_final_cad_success": 0.06074515
+        },
+        "latency_seconds": {
+          "mean": 288.006043,
+          "median": 266.91603,
+          "p95": 725.439725
+        },
+        "transport_retries": 5,
+        "runs_with_transport_retries": 3,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 45,
+          "evaluated": 44,
+          "passed": 44
+        }
+      },
+      "full_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 10,
+              "total": 18,
+              "rate": 0.55555556,
+              "wilson_95_low": 0.33716069,
+              "wilson_95_high": 0.75440769
+            },
+            "1": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 9,
+              "total": 18,
+              "rate": 0.5,
+              "wilson_95_low": 0.29030704,
+              "wilson_95_high": 0.70969296
+            },
+            "1": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          }
+        },
+        "repairs_used": 13,
+        "runs_with_repairs": 9,
+        "execution_repairs": 4,
+        "constraint_repairs": 9,
+        "mean_repairs_per_cad_run": 0.722222,
+        "tokens": {
+          "prompt": 32912,
+          "completion": 233784,
+          "total": 266696
+        },
+        "cost": {
+          "total": 0.91783,
+          "cad_only": 0.91783,
+          "currency": "USD",
+          "per_final_cad_success": 0.06118867
+        },
+        "latency_seconds": {
+          "mean": 304.304433,
+          "median": 249.620475,
+          "p95": 763.023842
+        },
+        "transport_retries": 11,
+        "runs_with_transport_retries": 8,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 45,
+          "evaluated": 42,
+          "passed": 41
+        }
+      }
+    },
+    "holes_and_slots": {
+      "baseline": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            },
+            "1": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            },
+            "1": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          }
+        },
+        "repairs_used": 10,
+        "runs_with_repairs": 6,
+        "execution_repairs": 3,
+        "constraint_repairs": 7,
+        "mean_repairs_per_cad_run": 0.555556,
+        "tokens": {
+          "prompt": 13992,
+          "completion": 111261,
+          "total": 125253
+        },
+        "cost": {
+          "total": 0.43471875,
+          "cad_only": 0.43471875,
+          "currency": "USD",
+          "per_final_cad_success": 0.02898125
+        },
+        "latency_seconds": {
+          "mean": 138.524836,
+          "median": 78.116447,
+          "p95": 550.038369
+        },
+        "transport_retries": 7,
+        "runs_with_transport_retries": 3,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 72,
+          "evaluated": 72,
+          "passed": 69
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "1": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "1": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          }
+        },
+        "repairs_used": 7,
+        "runs_with_repairs": 4,
+        "execution_repairs": 0,
+        "constraint_repairs": 7,
+        "mean_repairs_per_cad_run": 0.388889,
+        "tokens": {
+          "prompt": 21674,
+          "completion": 149790,
+          "total": 171464
+        },
+        "cost": {
+          "total": 0.588805,
+          "cad_only": 0.588805,
+          "currency": "USD",
+          "per_final_cad_success": 0.03925367
+        },
+        "latency_seconds": {
+          "mean": 158.346147,
+          "median": 113.663412,
+          "p95": 475.149074
+        },
+        "transport_retries": 2,
+        "runs_with_transport_retries": 2,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 72,
+          "evaluated": 72,
+          "passed": 69
+        }
+      },
+      "full_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 11,
+              "total": 18,
+              "rate": 0.61111111,
+              "wilson_95_low": 0.38618669,
+              "wilson_95_high": 0.79695008
+            },
+            "1": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 11,
+              "total": 18,
+              "rate": 0.61111111,
+              "wilson_95_low": 0.38618669,
+              "wilson_95_high": 0.79695008
+            },
+            "1": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          }
+        },
+        "repairs_used": 10,
+        "runs_with_repairs": 7,
+        "execution_repairs": 2,
+        "constraint_repairs": 8,
+        "mean_repairs_per_cad_run": 0.555556,
+        "tokens": {
+          "prompt": 25463,
+          "completion": 111457,
+          "total": 136920
+        },
+        "cost": {
+          "total": 0.4497925,
+          "cad_only": 0.4497925,
+          "currency": "USD",
+          "per_final_cad_success": 0.02998617
+        },
+        "latency_seconds": {
+          "mean": 115.339947,
+          "median": 95.352039,
+          "p95": 281.210557
+        },
+        "transport_retries": 2,
+        "runs_with_transport_retries": 2,
+        "parameterized_code_count": 15,
+        "constraint_groups": {
+          "registered": 72,
+          "evaluated": 72,
+          "passed": 69
+        }
+      }
+    },
+    "out_of_distribution": {
+      "baseline": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          }
+        },
+        "repairs_used": 2,
+        "runs_with_repairs": 1,
+        "execution_repairs": 1,
+        "constraint_repairs": 1,
+        "mean_repairs_per_cad_run": 0.111111,
+        "tokens": {
+          "prompt": 7409,
+          "completion": 234074,
+          "total": 241483
+        },
+        "cost": {
+          "total": 0.88703875,
+          "cad_only": 0.88703875,
+          "currency": "USD",
+          "per_final_cad_success": 0.04927993
+        },
+        "latency_seconds": {
+          "mean": 242.387899,
+          "median": 133.482996,
+          "p95": 993.255527
+        },
+        "transport_retries": 3,
+        "runs_with_transport_retries": 2,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 42,
+          "evaluated": 42,
+          "passed": 42
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "1": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "1": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          }
+        },
+        "repairs_used": 6,
+        "runs_with_repairs": 4,
+        "execution_repairs": 0,
+        "constraint_repairs": 6,
+        "mean_repairs_per_cad_run": 0.333333,
+        "tokens": {
+          "prompt": 21032,
+          "completion": 352141,
+          "total": 373173
+        },
+        "cost": {
+          "total": 1.34681875,
+          "cad_only": 1.34681875,
+          "currency": "USD",
+          "per_final_cad_success": 0.07482326
+        },
+        "latency_seconds": {
+          "mean": 352.270325,
+          "median": 257.379821,
+          "p95": 1576.785679
+        },
+        "transport_retries": 4,
+        "runs_with_transport_retries": 3,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 42,
+          "evaluated": 42,
+          "passed": 42
+        }
+      },
+      "full_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          }
+        },
+        "repairs_used": 5,
+        "runs_with_repairs": 4,
+        "execution_repairs": 1,
+        "constraint_repairs": 4,
+        "mean_repairs_per_cad_run": 0.277778,
+        "tokens": {
+          "prompt": 19086,
+          "completion": 263074,
+          "total": 282160
+        },
+        "cost": {
+          "total": 1.010385,
+          "cad_only": 1.010385,
+          "currency": "USD",
+          "per_final_cad_success": 0.05943441
+        },
+        "latency_seconds": {
+          "mean": 287.533565,
+          "median": 199.888024,
+          "p95": 830.838875
+        },
+        "transport_retries": 9,
+        "runs_with_transport_retries": 5,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 42,
+          "evaluated": 42,
+          "passed": 41
+        }
+      }
+    },
+    "primitive": {
+      "baseline": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "1": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "2": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "1": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "2": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            }
+          }
+        },
+        "repairs_used": 5,
+        "runs_with_repairs": 3,
+        "execution_repairs": 5,
+        "constraint_repairs": 0,
+        "mean_repairs_per_cad_run": 0.277778,
+        "tokens": {
+          "prompt": 7579,
+          "completion": 50273,
+          "total": 57852
+        },
+        "cost": {
+          "total": 0.1979975,
+          "cad_only": 0.1979975,
+          "currency": "USD",
+          "per_final_cad_success": 0.01237484
+        },
+        "latency_seconds": {
+          "mean": 67.834431,
+          "median": 23.487773,
+          "p95": 303.643776
+        },
+        "transport_retries": 2,
+        "runs_with_transport_retries": 1,
+        "parameterized_code_count": 16,
+        "constraint_groups": {
+          "registered": 54,
+          "evaluated": 49,
+          "passed": 49
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "1": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "1": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            },
+            "2": {
+              "passed": 15,
+              "total": 18,
+              "rate": 0.83333333,
+              "wilson_95_low": 0.607775,
+              "wilson_95_high": 0.9416353
+            }
+          }
+        },
+        "repairs_used": 7,
+        "runs_with_repairs": 4,
+        "execution_repairs": 6,
+        "constraint_repairs": 1,
+        "mean_repairs_per_cad_run": 0.388889,
+        "tokens": {
+          "prompt": 19076,
+          "completion": 74111,
+          "total": 93187
+        },
+        "cost": {
+          "total": 0.30176125,
+          "cad_only": 0.30176125,
+          "currency": "USD",
+          "per_final_cad_success": 0.02011742
+        },
+        "latency_seconds": {
+          "mean": 97.768346,
+          "median": 33.248389,
+          "p95": 395.45577
+        },
+        "transport_retries": 3,
+        "runs_with_transport_retries": 3,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 54,
+          "evaluated": 45,
+          "passed": 45
+        }
+      },
+      "full_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 14,
+              "total": 18,
+              "rate": 0.77777778,
+              "wilson_95_low": 0.54784974,
+              "wilson_95_high": 0.90999218
+            },
+            "1": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          }
+        },
+        "repairs_used": 7,
+        "runs_with_repairs": 5,
+        "execution_repairs": 6,
+        "constraint_repairs": 1,
+        "mean_repairs_per_cad_run": 0.388889,
+        "tokens": {
+          "prompt": 16856,
+          "completion": 79965,
+          "total": 96821
+        },
+        "cost": {
+          "total": 0.32093875,
+          "cad_only": 0.32093875,
+          "currency": "USD",
+          "per_final_cad_success": 0.01887875
+        },
+        "latency_seconds": {
+          "mean": 96.69024,
+          "median": 51.00108,
+          "p95": 329.754903
+        },
+        "transport_retries": 2,
+        "runs_with_transport_retries": 2,
+        "parameterized_code_count": 15,
+        "constraint_groups": {
+          "registered": 54,
+          "evaluated": 51,
+          "passed": 51
+        }
+      }
+    },
+    "revolved": {
+      "baseline": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          }
+        },
+        "repairs_used": 6,
+        "runs_with_repairs": 5,
+        "execution_repairs": 3,
+        "constraint_repairs": 3,
+        "mean_repairs_per_cad_run": 0.333333,
+        "tokens": {
+          "prompt": 9751,
+          "completion": 92210,
+          "total": 101961
+        },
+        "cost": {
+          "total": 0.35797625,
+          "cad_only": 0.35797625,
+          "currency": "USD",
+          "per_final_cad_success": 0.02105743
+        },
+        "latency_seconds": {
+          "mean": 99.922051,
+          "median": 50.884295,
+          "p95": 334.67469
+        },
+        "transport_retries": 4,
+        "runs_with_transport_retries": 2,
+        "parameterized_code_count": 16,
+        "constraint_groups": {
+          "registered": 63,
+          "evaluated": 61,
+          "passed": 61
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          }
+        },
+        "repairs_used": 3,
+        "runs_with_repairs": 2,
+        "execution_repairs": 0,
+        "constraint_repairs": 3,
+        "mean_repairs_per_cad_run": 0.166667,
+        "tokens": {
+          "prompt": 16279,
+          "completion": 87471,
+          "total": 103750
+        },
+        "cost": {
+          "total": 0.348365,
+          "cad_only": 0.348365,
+          "currency": "USD",
+          "per_final_cad_success": 0.01935361
+        },
+        "latency_seconds": {
+          "mean": 88.232277,
+          "median": 64.09366,
+          "p95": 311.832199
+        },
+        "transport_retries": 0,
+        "runs_with_transport_retries": 0,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 63,
+          "evaluated": 63,
+          "passed": 63
+        }
+      },
+      "full_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          }
+        },
+        "repairs_used": 5,
+        "runs_with_repairs": 5,
+        "execution_repairs": 2,
+        "constraint_repairs": 3,
+        "mean_repairs_per_cad_run": 0.277778,
+        "tokens": {
+          "prompt": 22586,
+          "completion": 111197,
+          "total": 133783
+        },
+        "cost": {
+          "total": 0.44522125,
+          "cad_only": 0.44522125,
+          "currency": "USD",
+          "per_final_cad_success": 0.02473451
+        },
+        "latency_seconds": {
+          "mean": 159.768258,
+          "median": 81.429518,
+          "p95": 768.253922
+        },
+        "transport_retries": 6,
+        "runs_with_transport_retries": 3,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 63,
+          "evaluated": 63,
+          "passed": 63
+        }
+      }
+    },
+    "thin_wall": {
+      "baseline": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          }
+        },
+        "repairs_used": 0,
+        "runs_with_repairs": 0,
+        "execution_repairs": 0,
+        "constraint_repairs": 0,
+        "mean_repairs_per_cad_run": 0.0,
+        "tokens": {
+          "prompt": 4473,
+          "completion": 38375,
+          "total": 42848
+        },
+        "cost": {
+          "total": 0.1494975,
+          "cad_only": 0.1494975,
+          "currency": "USD",
+          "per_final_cad_success": 0.00830542
+        },
+        "latency_seconds": {
+          "mean": 47.59414,
+          "median": 30.338013,
+          "p95": 148.804127
+        },
+        "transport_retries": 4,
+        "runs_with_transport_retries": 2,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 57,
+          "evaluated": 57,
+          "passed": 57
+        }
+      },
+      "lightweight_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 13,
+              "total": 18,
+              "rate": 0.72222222,
+              "wilson_95_low": 0.49126922,
+              "wilson_95_high": 0.87500431
+            },
+            "1": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            },
+            "2": {
+              "passed": 17,
+              "total": 18,
+              "rate": 0.94444444,
+              "wilson_95_low": 0.742422,
+              "wilson_95_high": 0.99012506
+            }
+          }
+        },
+        "repairs_used": 6,
+        "runs_with_repairs": 5,
+        "execution_repairs": 0,
+        "constraint_repairs": 6,
+        "mean_repairs_per_cad_run": 0.333333,
+        "tokens": {
+          "prompt": 17962,
+          "completion": 74695,
+          "total": 92657
+        },
+        "cost": {
+          "total": 0.30255875,
+          "cad_only": 0.30255875,
+          "currency": "USD",
+          "per_final_cad_success": 0.01779757
+        },
+        "latency_seconds": {
+          "mean": 89.787722,
+          "median": 54.301818,
+          "p95": 311.903817
+        },
+        "transport_retries": 2,
+        "runs_with_transport_retries": 2,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 57,
+          "evaluated": 56,
+          "passed": 56
+        }
+      },
+      "full_rag": {
+        "run_count": 18,
+        "cad_run_count": 18,
+        "clarification_run_count": 0,
+        "clarification_response_count": 0,
+        "pass_curves": {
+          "execution": {
+            "0": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "1": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            },
+            "2": {
+              "passed": 18,
+              "total": 18,
+              "rate": 1.0,
+              "wilson_95_low": 0.82411545,
+              "wilson_95_high": 1.0
+            }
+          },
+          "constraint": {
+            "0": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            },
+            "1": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "2": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            }
+          },
+          "end_to_end": {
+            "0": {
+              "passed": 12,
+              "total": 18,
+              "rate": 0.66666667,
+              "wilson_95_low": 0.43749069,
+              "wilson_95_high": 0.83721446
+            },
+            "1": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            },
+            "2": {
+              "passed": 16,
+              "total": 18,
+              "rate": 0.88888889,
+              "wilson_95_low": 0.67199755,
+              "wilson_95_high": 0.96898113
+            }
+          }
+        },
+        "repairs_used": 8,
+        "runs_with_repairs": 6,
+        "execution_repairs": 3,
+        "constraint_repairs": 5,
+        "mean_repairs_per_cad_run": 0.444444,
+        "tokens": {
+          "prompt": 18572,
+          "completion": 123626,
+          "total": 142198
+        },
+        "cost": {
+          "total": 0.4868125,
+          "cad_only": 0.4868125,
+          "currency": "USD",
+          "per_final_cad_success": 0.03042578
+        },
+        "latency_seconds": {
+          "mean": 146.607098,
+          "median": 41.475335,
+          "p95": 624.966827
+        },
+        "transport_retries": 4,
+        "runs_with_transport_retries": 3,
+        "parameterized_code_count": 18,
+        "constraint_groups": {
+          "registered": 57,
+          "evaluated": 55,
+          "passed": 55
+        }
+      }
+    }
+  },
+  "pairwise": [
+    {
+      "comparison": "lightweight_rag_vs_baseline",
+      "budget": 0,
+      "paired_runs": 162,
+      "baseline_passed": 124,
+      "comparison_passed": 124,
+      "difference_percentage_points": 0.0,
+      "both_pass": 103,
+      "baseline_only": 21,
+      "comparison_only": 21,
+      "both_fail": 17,
+      "mcnemar_exact_p": 1.0
+    },
+    {
+      "comparison": "lightweight_rag_vs_baseline",
+      "budget": 1,
+      "paired_runs": 162,
+      "baseline_passed": 147,
+      "comparison_passed": 143,
+      "difference_percentage_points": -2.4691,
+      "both_pass": 136,
+      "baseline_only": 11,
+      "comparison_only": 7,
+      "both_fail": 8,
+      "mcnemar_exact_p": 0.48068237
+    },
+    {
+      "comparison": "lightweight_rag_vs_baseline",
+      "budget": 2,
+      "paired_runs": 162,
+      "baseline_passed": 152,
+      "comparison_passed": 147,
+      "difference_percentage_points": -3.0864,
+      "both_pass": 145,
+      "baseline_only": 7,
+      "comparison_only": 2,
+      "both_fail": 8,
+      "mcnemar_exact_p": 0.1796875
+    },
+    {
+      "comparison": "full_rag_vs_baseline",
+      "budget": 0,
+      "paired_runs": 162,
+      "baseline_passed": 124,
+      "comparison_passed": 107,
+      "difference_percentage_points": -10.4938,
+      "both_pass": 92,
+      "baseline_only": 32,
+      "comparison_only": 15,
+      "both_fail": 23,
+      "mcnemar_exact_p": 0.01862384
+    },
+    {
+      "comparison": "full_rag_vs_baseline",
+      "budget": 1,
+      "paired_runs": 162,
+      "baseline_passed": 147,
+      "comparison_passed": 142,
+      "difference_percentage_points": -3.0864,
+      "both_pass": 135,
+      "baseline_only": 12,
+      "comparison_only": 7,
+      "both_fail": 8,
+      "mcnemar_exact_p": 0.35928345
+    },
+    {
+      "comparison": "full_rag_vs_baseline",
+      "budget": 2,
+      "paired_runs": 162,
+      "baseline_passed": 152,
+      "comparison_passed": 146,
+      "difference_percentage_points": -3.7037,
+      "both_pass": 141,
+      "baseline_only": 11,
+      "comparison_only": 5,
+      "both_fail": 5,
+      "mcnemar_exact_p": 0.21011353
+    }
+  ],
+  "failures": {
+    "initial_failure_count": 131,
+    "final_failure_count": 41,
+    "recovered_count": 90,
+    "conditional_recovery_rate": 0.6870229,
+    "final_failure_stage_counts": {
+      "hard_constraint": 36,
+      "execution_or_export": 5
+    },
+    "failed_constraint_type_counts": {
+      "cylindrical_hole_pattern": 21,
+      "solid_count": 11,
+      "bbox_dimensions": 11,
+      "bbox_bounds": 7
+    },
+    "failed_constraint_id_counts": {
+      "single_solid": 10,
+      "counterbores": 9,
+      "overall_dimensions": 9,
+      "pin_hole": 8,
+      "vertical_ports": 4,
+      "centered_height": 4,
+      "base_at_z0": 3,
+      "overall_envelope": 2,
+      "single_printable_solid": 1
+    },
+    "final_failure_rows": [
+      {
+        "run_key": "B017:lightweight_rag:seed_101",
+        "prompt_id": "B017",
+        "category": "holes_and_slots",
+        "condition": "lightweight_rag",
+        "seed": 101,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "counterbores"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B017:full_rag:seed_101",
+        "prompt_id": "B017",
+        "category": "holes_and_slots",
+        "condition": "full_rag",
+        "seed": 101,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "counterbores"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B017:baseline:seed_101",
+        "prompt_id": "B017",
+        "category": "holes_and_slots",
+        "condition": "baseline",
+        "seed": 101,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "counterbores"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B025:full_rag:seed_101",
+        "prompt_id": "B025",
+        "category": "thin_wall",
+        "condition": "full_rag",
+        "seed": 101,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "single_solid"
+        ],
+        "failed_constraint_types": [
+          "solid_count"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B031:lightweight_rag:seed_101",
+        "prompt_id": "B031",
+        "category": "complex_boolean",
+        "condition": "lightweight_rag",
+        "seed": 101,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "vertical_ports"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B033:baseline:seed_101",
+        "prompt_id": "B033",
+        "category": "complex_boolean",
+        "condition": "baseline",
+        "seed": 101,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "overall_dimensions",
+          "base_at_z0",
+          "single_solid",
+          "pin_hole"
+        ],
+        "failed_constraint_types": [
+          "bbox_dimensions",
+          "bbox_bounds",
+          "solid_count",
+          "cylindrical_hole_pattern"
+        ],
+        "error": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B033/baseline/seed_101/run_20260807_133401/_run_cadquery_export.py\", line 12, in <module>\n    namespace = runpy.run_path(str(code_path))\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B033/baseline/seed_101/run_20260807_133401/generated_model_repair_2.py\", line 33, in <module>\n    .workplane(origin=(pin_hole_x, -block_width / 2.0 - 1.0, pin_hole_z), normal=(0, 1, 0))\n     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Workplane.workplane() got an unexpected keyword argument 'normal'\n"
+      },
+      {
+        "run_key": "B033:lightweight_rag:seed_101",
+        "prompt_id": "B033",
+        "category": "complex_boolean",
+        "condition": "lightweight_rag",
+        "seed": 101,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "pin_hole"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B036:lightweight_rag:seed_101",
+        "prompt_id": "B036",
+        "category": "curved_surface",
+        "condition": "lightweight_rag",
+        "seed": 101,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "single_solid"
+        ],
+        "failed_constraint_types": [
+          "solid_count"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B050:full_rag:seed_101",
+        "prompt_id": "B050",
+        "category": "ambiguous",
+        "condition": "full_rag",
+        "seed": 101,
+        "stage": "execution_or_export",
+        "failed_constraint_ids": [],
+        "failed_constraint_types": [],
+        "error": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B050/full_rag/seed_101/run_20260807_172444/_run_cadquery_export.py\", line 12, in <module>\n    namespace = runpy.run_path(str(code_path))\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B050/full_rag/seed_101/run_20260807_172444/generated_model_repair_2.py\", line 37, in <module>\n    result = result.faces(\"<Z\").edges().fillet(bottom_fillet)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 1244, in fillet\n    s = solid.fillet(radius, edgeList)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/occ_impl/shapes.py\", line 4016, in fillet\n    return self.__class__(fillet_builder.Shape())\n                          ~~~~~~~~~~~~~~~~~~~~^^\nOCP.StdFail.StdFail_NotDone: BRep_API: command not done\n"
+      },
+      {
+        "run_key": "B062:lightweight_rag:seed_101",
+        "prompt_id": "B062",
+        "category": "primitive",
+        "condition": "lightweight_rag",
+        "seed": 101,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "overall_dimensions",
+          "centered_height",
+          "single_solid"
+        ],
+        "failed_constraint_types": [
+          "bbox_dimensions",
+          "bbox_bounds",
+          "solid_count"
+        ],
+        "error": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B062/lightweight_rag/seed_101/run_20260807_190532/_run_cadquery_export.py\", line 12, in <module>\n    namespace = runpy.run_path(str(code_path))\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B062/lightweight_rag/seed_101/run_20260807_190532/generated_model_repair_2.py\", line 10, in <module>\n    .revolve()\n     ~~~~~~~^^\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 3154, in revolve\n    r = self._revolve(angleDegrees, axisStart, axisEnd)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 3818, in _revolve\n    thisObj = Solid.revolve(f, angleDegrees, Vector(axisStart), Vector(axisEnd))\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/multimethod/__init__.py\", line 375, in __call__\n    return func(*args, **kwargs)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/occ_impl/shapes.py\", line 4591, in revolve\n    return cls(revol_builder.Shape())\n               ~~~~~~~~~~~~~~~~~~~^^\nOCP.StdFail.StdFail_NotDone: BRep_API: command not done\n"
+      },
+      {
+        "run_key": "B062:full_rag:seed_101",
+        "prompt_id": "B062",
+        "category": "primitive",
+        "condition": "full_rag",
+        "seed": 101,
+        "stage": "execution_or_export",
+        "failed_constraint_ids": [],
+        "failed_constraint_types": [],
+        "error": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B062/full_rag/seed_101/run_20260807_191057/_run_cadquery_export.py\", line 12, in <module>\n    namespace = runpy.run_path(str(code_path))\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B062/full_rag/seed_101/run_20260807_191057/generated_model_repair_2.py\", line 10, in <module>\n    .revolve(360.0, (0.0, 0.0), (0.0, 1.0))\n     ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 3154, in revolve\n    r = self._revolve(angleDegrees, axisStart, axisEnd)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 3818, in _revolve\n    thisObj = Solid.revolve(f, angleDegrees, Vector(axisStart), Vector(axisEnd))\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/multimethod/__init__.py\", line 375, in __call__\n    return func(*args, **kwargs)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/occ_impl/shapes.py\", line 4591, in revolve\n    return cls(revol_builder.Shape())\n               ~~~~~~~~~~~~~~~~~~~^^\nOCP.StdFail.StdFail_NotDone: BRep_API: command not done\n"
+      },
+      {
+        "run_key": "B066:baseline:seed_101",
+        "prompt_id": "B066",
+        "category": "revolved",
+        "condition": "baseline",
+        "seed": 101,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "overall_dimensions",
+          "base_at_z0"
+        ],
+        "failed_constraint_types": [
+          "bbox_dimensions",
+          "bbox_bounds"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B017:full_rag:seed_202",
+        "prompt_id": "B017",
+        "category": "holes_and_slots",
+        "condition": "full_rag",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "counterbores"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B017:baseline:seed_202",
+        "prompt_id": "B017",
+        "category": "holes_and_slots",
+        "condition": "baseline",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "counterbores"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B017:lightweight_rag:seed_202",
+        "prompt_id": "B017",
+        "category": "holes_and_slots",
+        "condition": "lightweight_rag",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "counterbores"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B025:lightweight_rag:seed_202",
+        "prompt_id": "B025",
+        "category": "thin_wall",
+        "condition": "lightweight_rag",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "single_solid"
+        ],
+        "failed_constraint_types": [
+          "solid_count"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B031:lightweight_rag:seed_202",
+        "prompt_id": "B031",
+        "category": "complex_boolean",
+        "condition": "lightweight_rag",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "vertical_ports"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B031:full_rag:seed_202",
+        "prompt_id": "B031",
+        "category": "complex_boolean",
+        "condition": "full_rag",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "vertical_ports"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B033:baseline:seed_202",
+        "prompt_id": "B033",
+        "category": "complex_boolean",
+        "condition": "baseline",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "pin_hole"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B033:lightweight_rag:seed_202",
+        "prompt_id": "B033",
+        "category": "complex_boolean",
+        "condition": "lightweight_rag",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "pin_hole"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B033:full_rag:seed_202",
+        "prompt_id": "B033",
+        "category": "complex_boolean",
+        "condition": "full_rag",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "pin_hole"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B039:full_rag:seed_202",
+        "prompt_id": "B039",
+        "category": "curved_surface",
+        "condition": "full_rag",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "overall_envelope"
+        ],
+        "failed_constraint_types": [
+          "bbox_dimensions"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B050:lightweight_rag:seed_202",
+        "prompt_id": "B050",
+        "category": "ambiguous",
+        "condition": "lightweight_rag",
+        "seed": 202,
+        "stage": "execution_or_export",
+        "failed_constraint_ids": [],
+        "failed_constraint_types": [],
+        "error": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B050/lightweight_rag/seed_202/run_20260808_024911/_run_cadquery_export.py\", line 12, in <module>\n    namespace = runpy.run_path(str(code_path))\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B050/lightweight_rag/seed_202/run_20260808_024911/generated_model_repair_2.py\", line 27, in <module>\n    knob = knob.faces(\"<Z\").chamfer(bottom_chamfer)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 1279, in chamfer\n    s = solid.chamfer(length, length2, edgeList)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/occ_impl/shapes.py\", line 4052, in chamfer\n    return self.__class__(chamfer_builder.Shape())\n                          ~~~~~~~~~~~~~~~~~~~~~^^\nOCP.StdFail.StdFail_NotDone: BRep_API: command not done\n"
+      },
+      {
+        "run_key": "B058:full_rag:seed_202",
+        "prompt_id": "B058",
+        "category": "out_of_distribution",
+        "condition": "full_rag",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "overall_envelope"
+        ],
+        "failed_constraint_types": [
+          "bbox_dimensions"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B062:baseline:seed_202",
+        "prompt_id": "B062",
+        "category": "primitive",
+        "condition": "baseline",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "overall_dimensions",
+          "centered_height"
+        ],
+        "failed_constraint_types": [
+          "bbox_dimensions",
+          "bbox_bounds"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B062:lightweight_rag:seed_202",
+        "prompt_id": "B062",
+        "category": "primitive",
+        "condition": "lightweight_rag",
+        "seed": 202,
+        "stage": "execution_or_export",
+        "failed_constraint_ids": [],
+        "failed_constraint_types": [],
+        "error": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B062/lightweight_rag/seed_202/run_20260808_042645/_run_cadquery_export.py\", line 12, in <module>\n    namespace = runpy.run_path(str(code_path))\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B062/lightweight_rag/seed_202/run_20260808_042645/generated_model_repair_2.py\", line 10, in <module>\n    .revolve(360, (0, 0), (0, 1))\n     ~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 3154, in revolve\n    r = self._revolve(angleDegrees, axisStart, axisEnd)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 3818, in _revolve\n    thisObj = Solid.revolve(f, angleDegrees, Vector(axisStart), Vector(axisEnd))\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/multimethod/__init__.py\", line 375, in __call__\n    return func(*args, **kwargs)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/occ_impl/shapes.py\", line 4591, in revolve\n    return cls(revol_builder.Shape())\n               ~~~~~~~~~~~~~~~~~~~^^\nOCP.StdFail.StdFail_NotDone: BRep_API: command not done\n"
+      },
+      {
+        "run_key": "B067:lightweight_rag:seed_202",
+        "prompt_id": "B067",
+        "category": "complex_boolean",
+        "condition": "lightweight_rag",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "overall_dimensions"
+        ],
+        "failed_constraint_types": [
+          "bbox_dimensions"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B068:baseline:seed_202",
+        "prompt_id": "B068",
+        "category": "curved_surface",
+        "condition": "baseline",
+        "seed": 202,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "overall_dimensions"
+        ],
+        "failed_constraint_types": [
+          "bbox_dimensions"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B017:baseline:seed_303",
+        "prompt_id": "B017",
+        "category": "holes_and_slots",
+        "condition": "baseline",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "counterbores"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B017:lightweight_rag:seed_303",
+        "prompt_id": "B017",
+        "category": "holes_and_slots",
+        "condition": "lightweight_rag",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "counterbores"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B017:full_rag:seed_303",
+        "prompt_id": "B017",
+        "category": "holes_and_slots",
+        "condition": "full_rag",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "counterbores"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B025:full_rag:seed_303",
+        "prompt_id": "B025",
+        "category": "thin_wall",
+        "condition": "full_rag",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "single_solid"
+        ],
+        "failed_constraint_types": [
+          "solid_count"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B031:full_rag:seed_303",
+        "prompt_id": "B031",
+        "category": "complex_boolean",
+        "condition": "full_rag",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "vertical_ports"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B033:lightweight_rag:seed_303",
+        "prompt_id": "B033",
+        "category": "complex_boolean",
+        "condition": "lightweight_rag",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "pin_hole"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B033:full_rag:seed_303",
+        "prompt_id": "B033",
+        "category": "complex_boolean",
+        "condition": "full_rag",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "pin_hole"
+        ],
+        "failed_constraint_types": [
+          "cylindrical_hole_pattern"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B033:baseline:seed_303",
+        "prompt_id": "B033",
+        "category": "complex_boolean",
+        "condition": "baseline",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "overall_dimensions",
+          "base_at_z0",
+          "single_solid",
+          "pin_hole"
+        ],
+        "failed_constraint_types": [
+          "bbox_dimensions",
+          "bbox_bounds",
+          "solid_count",
+          "cylindrical_hole_pattern"
+        ],
+        "error": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B033/baseline/seed_303/run_20260808_082004/_run_cadquery_export.py\", line 12, in <module>\n    namespace = runpy.run_path(str(code_path))\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B033/baseline/seed_303/run_20260808_082004/generated_model_repair_2.py\", line 35, in <module>\n    cq.Workplane(origin=(0, -block_width / 2 - 1, pin_z), normal=(0, 1, 0))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Workplane.__init__() got an unexpected keyword argument 'normal'\n"
+      },
+      {
+        "run_key": "B038:full_rag:seed_303",
+        "prompt_id": "B038",
+        "category": "curved_surface",
+        "condition": "full_rag",
+        "seed": 303,
+        "stage": "execution_or_export",
+        "failed_constraint_ids": [],
+        "failed_constraint_types": [],
+        "error": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B038/full_rag/seed_303/run_20260808_085312/_run_cadquery_export.py\", line 12, in <module>\n    namespace = runpy.run_path(str(code_path))\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B038/full_rag/seed_303/run_20260808_085312/generated_model_repair_2.py\", line 49, in <module>\n    lofted_solid = cq.Solid.makeLoft([root_wire, tip_wire])\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/occ_impl/shapes.py\", line 4326, in makeLoft\n    loft_builder.AddWire(w.wrapped)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\nTypeError: AddWire(): incompatible function arguments. The following argument types are supported:\n    1. (self: OCP.BRepOffsetAPI.BRepOffsetAPI_ThruSections, wire: OCP.TopoDS.TopoDS_Wire) -> None\n\nInvoked with: <OCP.BRepOffsetAPI.BRepOffsetAPI_ThruSections object at 0x75ac0a207c70>, <OCP.TopoDS.TopoDS_Edge object at 0x75ab85190930>\n"
+      },
+      {
+        "run_key": "B040:full_rag:seed_303",
+        "prompt_id": "B040",
+        "category": "curved_surface",
+        "condition": "full_rag",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "single_solid"
+        ],
+        "failed_constraint_types": [
+          "solid_count"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B046:full_rag:seed_303",
+        "prompt_id": "B046",
+        "category": "ambiguous",
+        "condition": "full_rag",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "single_printable_solid"
+        ],
+        "failed_constraint_types": [
+          "solid_count"
+        ],
+        "error": ""
+      },
+      {
+        "run_key": "B062:baseline:seed_303",
+        "prompt_id": "B062",
+        "category": "primitive",
+        "condition": "baseline",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "overall_dimensions",
+          "centered_height",
+          "single_solid"
+        ],
+        "failed_constraint_types": [
+          "bbox_dimensions",
+          "bbox_bounds",
+          "solid_count"
+        ],
+        "error": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B062/baseline/seed_303/run_20260808_125242/_run_cadquery_export.py\", line 12, in <module>\n    namespace = runpy.run_path(str(code_path))\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B062/baseline/seed_303/run_20260808_125242/generated_model_repair_2.py\", line 10, in <module>\n    .revolve(360)\n     ~~~~~~~^^^^^\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 3154, in revolve\n    r = self._revolve(angleDegrees, axisStart, axisEnd)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 3818, in _revolve\n    thisObj = Solid.revolve(f, angleDegrees, Vector(axisStart), Vector(axisEnd))\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/multimethod/__init__.py\", line 375, in __call__\n    return func(*args, **kwargs)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/occ_impl/shapes.py\", line 4591, in revolve\n    return cls(revol_builder.Shape())\n               ~~~~~~~~~~~~~~~~~~~^^\nOCP.StdFail.StdFail_NotDone: BRep_API: command not done\n"
+      },
+      {
+        "run_key": "B062:lightweight_rag:seed_303",
+        "prompt_id": "B062",
+        "category": "primitive",
+        "condition": "lightweight_rag",
+        "seed": 303,
+        "stage": "hard_constraint",
+        "failed_constraint_ids": [
+          "overall_dimensions",
+          "centered_height",
+          "single_solid"
+        ],
+        "failed_constraint_types": [
+          "bbox_dimensions",
+          "bbox_bounds",
+          "solid_count"
+        ],
+        "error": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B062/lightweight_rag/seed_303/run_20260808_125525/_run_cadquery_export.py\", line 12, in <module>\n    namespace = runpy.run_path(str(code_path))\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<PROJECT_ROOT>/experiments/cadquery_benchmark_v1/results/full_b2/raw/B062/lightweight_rag/seed_303/run_20260808_125525/generated_model_repair_2.py\", line 10, in <module>\n    .revolve(360, (0, 0), (0, 1))\n     ~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 3154, in revolve\n    r = self._revolve(angleDegrees, axisStart, axisEnd)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/cq.py\", line 3818, in _revolve\n    thisObj = Solid.revolve(f, angleDegrees, Vector(axisStart), Vector(axisEnd))\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/multimethod/__init__.py\", line 375, in __call__\n    return func(*args, **kwargs)\n  File \"<HOME>/miniforge/envs/cq/lib/python3.14/site-packages/cadquery/occ_impl/shapes.py\", line 4591, in revolve\n    return cls(revol_builder.Shape())\n               ~~~~~~~~~~~~~~~~~~~^^\nOCP.StdFail.StdFail_NotDone: BRep_API: command not done\n"
+      }
+    ]
+  },
+  "repair_analysis": {
+    "runs_with_repair": 131,
+    "repair_count_distribution": {
+      "0": 355,
+      "1": 77,
+      "2": 54
+    },
+    "total_repairs": 185,
+    "execution_repairs": 60,
+    "constraint_repairs": 125,
+    "mean_repairs_all_cad_runs": 0.380658,
+    "mean_repairs_repaired_runs": 1.412214,
+    "initial_failures": 131,
+    "recovered_by_b1": 77,
+    "recovered_by_b2": 90,
+    "additional_recovery_at_b2": 13
+  },
+  "call_usage": {
+    "clarification": {
+      "calls": 54,
+      "tokens": 62497,
+      "cost": 0.16724625,
+      "latency_seconds": 1381.304837
+    },
+    "generation": {
+      "calls": 486,
+      "tokens": 3828582,
+      "cost": 13.69641,
+      "latency_seconds": 68840.351922
+    },
+    "repair_constraint": {
+      "calls": 125,
+      "tokens": 1163369,
+      "cost": 3.95765375,
+      "latency_seconds": 19058.450247
+    },
+    "repair_execution": {
+      "calls": 60,
+      "tokens": 414707,
+      "cost": 1.37241375,
+      "latency_seconds": 7266.450651
+    }
+  },
+  "interpretation_boundary": [
+    "Automatic results cover execution, exports, geometry validity, and registered hard constraints only.",
+    "Manual semantic and visual checks are not included in success rates.",
+    "Clarification responses are captured but remain unscored pending manual or VLM evaluation.",
+    "Failed provider calls without usage metadata are absent from token and cost totals."
+  ]
+}

@@ -7,6 +7,7 @@ import os
 import subprocess
 import sys
 import textwrap
+import time
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -31,6 +32,7 @@ class CadExecutionResult:
     returncode: int
     stdout: str
     stderr: str
+    duration_seconds: float
 
     @property
     def ok(self) -> bool:
@@ -135,6 +137,7 @@ def execute_cadquery_code(
     helper_path.write_text(textwrap.dedent(RUNNER_SCRIPT).strip() + "\n", encoding="utf-8")
 
     timed_out = False
+    started = time.monotonic()
     try:
         completed = subprocess.run(
             [python_executable, str(helper_path), str(code_path), str(step_path), str(stl_path)],
@@ -155,6 +158,7 @@ def execute_cadquery_code(
             f"CadQuery execution timed out after {timeout} seconds."
             + (f"\n\nPartial stderr:\n{partial_stderr}" if partial_stderr else "")
         )
+    duration_seconds = round(time.monotonic() - started, 6)
 
     metadata = {
         "description": description,
@@ -163,6 +167,7 @@ def execute_cadquery_code(
         "timeout_seconds": timeout,
         "timed_out": timed_out,
         "returncode": returncode,
+        "duration_seconds": duration_seconds,
         "stdout": stdout,
         "stderr": stderr,
         "step_path": str(step_path),
@@ -179,6 +184,7 @@ def execute_cadquery_code(
         returncode=returncode,
         stdout=stdout,
         stderr=stderr,
+        duration_seconds=duration_seconds,
     )
 
 

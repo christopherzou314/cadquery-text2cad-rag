@@ -21,13 +21,14 @@ and full-documentation RAG.
 
 - OpenAI-compatible `/chat/completions` API integration
 - SSE streaming with retry handling for interrupted or timed-out responses
-- Automatic traceback feedback and code repair after CadQuery execution errors
+- Automatic repair from execution tracebacks and measured hard-constraint failures
 - STEP and STL export with support for `Workplane`, `Shape`, and `Assembly`
 - Off-screen VTK rendering for PNG previews
 - Tkinter GUI with optional CQ-editor launch and automatic rendering
 - Baseline, lightweight RAG, and full RAG generation modes
 - Searchable CadQuery Workplane, Sketch, Assembly, Examples, and API references
 - Reproducible experiment scripts, metrics, reports, and visual comparisons
+- Exact STEP checks for solid count and cylindrical-hole geometry
 
 ## Requirements
 
@@ -65,6 +66,14 @@ OPENAI_API_KEY=your-api-key
 OPENAI_BASE_URL=https://api.example.com/v1
 OPENAI_MODEL=your-model-name
 
+# Optional estimated-cost calculation, using the provider's current prices.
+LLM_INPUT_COST_PER_1M_TOKENS=
+LLM_OUTPUT_COST_PER_1M_TOKENS=
+LLM_COST_CURRENCY=CNY
+
+# Qwen3.7 enables thinking by default; set false for lower latency and cost.
+LLM_ENABLE_THINKING=false
+
 # Optional: a specific interpreter containing CadQuery.
 CADQUERY_PYTHON=/path/to/your/cadquery/python
 ```
@@ -98,15 +107,37 @@ generated_model.py   generated CadQuery program
 model.step           STEP model
 model.stl            STL mesh
 run.json             execution metadata and captured errors
-agent_run.json       agent attempts and generation setting
+agent_run.json       complete agent, API, token, cost, and timing telemetry
 retrieval.json       retrieved references when RAG is enabled
 ```
 
+## Run Telemetry
+
+`agent_run.json` records the requested seed, whether it was actually sent to the
+provider, every generation and repair call, API transport retries, provider
+request IDs, token usage, estimated cost, CadQuery execution times, and total
+end-to-end latency. Missing provider usage or pricing is represented as `null`,
+never as a fabricated zero.
+
+Record an experiment seed with:
+
+```bash
+python -m src.text2cad.main "a 30 mm cube" --seed 101
+```
+
+The seed is always recorded in telemetry. For providers that support the
+OpenAI-compatible `seed` field, opt in with `--send-seed`; the benchmark runner
+sends its configured Qwen seeds by default.
+
+For Alibaba Cloud Model Studio endpoints, the client automatically sends
+`stream_options.include_usage=true`. Qwen reasoning, text-output, cached-input,
+and total token counts are retained when the provider returns them.
+
 ## Agent Repair Loop
 
-By default, the agent can make up to two repair attempts. When generated code
-fails, the previous program and its traceback are sent back to the same model,
-which must return a complete corrected program.
+By default, the agent has one total budget of two code revisions. Execution and
+export errors send traceback feedback; registered hard-constraint failures send
+measured expected/actual/tolerance feedback. Both consume the same budget.
 
 ```bash
 python -m src.text2cad.main \
@@ -117,6 +148,12 @@ python -m src.text2cad.main \
 API transport retries are handled separately from code-repair attempts. A
 partially received stream is discarded before the request is retried, preventing
 incomplete code from being executed.
+
+Each attempt writes its own evaluation and repair feedback. `agent_run.json`
+reports `ExecutionPass@B`, `ConstraintPass@B`, and `EndToEndPass@B`, together
+with separate execution- and constraint-repair counts. A GUI run uses the same
+total-budget policy; constraint repairs activate whenever machine-readable hard
+constraints are registered by the calling workflow.
 
 ## RAG Modes
 
@@ -163,24 +200,55 @@ The included experiment evaluates 10 prompts at increasing difficulty under all
 three generation settings. Traceback repair is disabled during evaluation so
 that compilation measures the first generated program.
 
-| Metric | Baseline | Lightweight RAG | Full RAG |
+| Quantitative metric | Baseline | Lightweight RAG | Full RAG |
 |---|---:|---:|---:|
-| First-generation compilation success | 100% | 100% | 100% |
-| Visible geometry | 100% | 100% | 100% |
-| Explicit dimensions reasonable | 90% | 90% | 100% |
-| Mean visual quality (1-5) | 4.60 | 4.70 | 4.90 |
-| Mean readability (1-5) | 4.90 | 4.90 | 5.00 |
+| First-generation execution success | 10/10 | 10/10 | 10/10 |
+| STEP and STL export success | 10/10 | 10/10 | 10/10 |
+| Valid, non-degenerate STL geometry | 10/10 | 10/10 | 10/10 |
+| Task success v1 | 9/10 | 10/10 | 10/10 |
+| V2 constraint groups passed/evaluated | 25/27 | 24/26 | 25/26 |
+| V2 constraint evaluation coverage | 27/27 | 26/27 | 26/27 |
+| Task success v2 | 9/10 | 7/10 | 8/10 |
 
 ![Three-way comparison for prompts P06-P10](experiments/cadquery_rag/results/contact_sheets/three_way_2.png)
 
 Full reports and result tables are available under
 [`experiments/cadquery_rag/results/`](experiments/cadquery_rag/results/).
+The exact metric definitions and current semantic-coverage limitations are in
+[`experiments/cadquery_rag/EVALUATION.md`](experiments/cadquery_rag/EVALUATION.md).
 
 Run the experiment and rebuild the report with:
 
 ```bash
 python scripts/run_rag_experiment.py --resume
+python scripts/run_rag_experiment.py --seed 101 --limit 1
+python scripts/evaluate_existing_experiment.py
 python scripts/analyze_rag_experiment.py
+```
+
+## 60-Case Benchmark v1
+
+The held-out benchmark contains 60 cases across ten geometry and prompt-behavior
+categories, evaluated under baseline, lightweight RAG, and full RAG with three
+seeds. A unified `B=2` repair budget covers both execution-triggered and measured
+hard-constraint repairs.
+
+All 540 scheduled tasks completed. Across the 486 CAD-generation runs,
+EndToEndPass improved from 73.05% at `B=0` to 91.56% at `B=2`. Baseline reached
+93.83% at `B=2`, lightweight RAG reached 90.74%, and full RAG reached 90.12%.
+The remaining 54 conflicting-description runs captured clarification responses
+and remain available for later human or VLM scoring.
+
+The frozen cases, protocol, final reports, aggregate tables, and figures are in
+[`experiments/cadquery_benchmark_v1/`](experiments/cadquery_benchmark_v1/).
+
+Validate, run/resume, and regenerate the final report with:
+
+```bash
+python scripts/validate_benchmark.py \
+  --cases experiments/cadquery_benchmark_v1/full_cases.json
+bash scripts/run_full_benchmark.sh
+python scripts/generate_final_benchmark_report.py
 ```
 
 ## Tests
@@ -191,8 +259,9 @@ Run the test suite with:
 python -m unittest discover -s tests -v
 ```
 
-The tests cover streaming response assembly, connection retries, partial-stream
-recovery, RAG retrieval behavior, and CadQuery Assembly export.
+The tests cover quantitative evaluation, streaming response assembly, connection
+retries, partial-stream recovery, RAG retrieval behavior, and CadQuery Assembly
+export.
 
 ## Project Structure
 
@@ -200,7 +269,9 @@ recovery, RAG retrieval behavior, and CadQuery Assembly export.
 src/text2cad/
   main.py       command-line interface
   gui.py        desktop interface and CQ-editor integration
-  agent.py      generation, execution, and traceback-repair loop
+  agent.py      generation, execution, evaluation, and unified repair loop
+  evaluation.py quantitative artifact and constraint evaluation
+  step_features.py exact STEP solid and cylindrical-hole extraction
   llm.py        streaming OpenAI-compatible API client
   prompts.py    generation prompts and response cleanup
   rag.py        reference loading, retrieval, and logging
@@ -208,7 +279,7 @@ src/text2cad/
   renderer.py   off-screen VTK preview rendering
 
 knowledge/      curated and generated CadQuery references
-experiments/    fixed prompts, reports, metrics, and comparison figures
+experiments/    frozen evaluator contract, benchmarks, reports, and metrics
 scripts/        knowledge-index and experiment utilities
 tests/          unit and export regression tests
 ```

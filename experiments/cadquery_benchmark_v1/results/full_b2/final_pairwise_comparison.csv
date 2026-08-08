@@ -1,0 +1,7 @@
+﻿comparison,budget,paired_runs,baseline_passed,comparison_passed,difference_percentage_points,both_pass,baseline_only,comparison_only,both_fail,mcnemar_exact_p
+lightweight_rag_vs_baseline,0,162,124,124,0.0,103,21,21,17,1.0
+lightweight_rag_vs_baseline,1,162,147,143,-2.4691,136,11,7,8,0.48068237
+lightweight_rag_vs_baseline,2,162,152,147,-3.0864,145,7,2,8,0.1796875
+full_rag_vs_baseline,0,162,124,107,-10.4938,92,32,15,23,0.01862384
+full_rag_vs_baseline,1,162,147,142,-3.0864,135,12,7,8,0.35928345
+full_rag_vs_baseline,2,162,152,146,-3.7037,141,11,5,5,0.21011353

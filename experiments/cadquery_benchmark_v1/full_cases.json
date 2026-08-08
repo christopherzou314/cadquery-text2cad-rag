@@ -1,0 +1,2999 @@
+{
+  "benchmark_id": "cadquery_benchmark_v1",
+  "benchmark_version": "1.0.0",
+  "evaluation_schema_version": "2.0",
+  "phase": "full",
+  "cases": [
+    {
+      "id": "B013",
+      "title": "Chamfered cube",
+      "category": "primitive",
+      "difficulty": "easy",
+      "prompt": "Create a 35 mm cube centered in X and Y with its bottom at Z=0. Apply a 3 mm chamfer to all twelve outer edges, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 35,
+            "y": 35,
+            "z": 35
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "centered_bottom",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "x": -17.5,
+            "y": -17.5,
+            "z": 0
+          },
+          "expected_max_mm": {
+            "x": 17.5,
+            "y": 17.5
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "all_edges_chamfered",
+          "criterion": "All twelve cube edges have a consistent 3 mm chamfer.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "primitive",
+        "cube",
+        "chamfer"
+      ]
+    },
+    {
+      "id": "B014",
+      "title": "Truncated cone",
+      "category": "primitive",
+      "difficulty": "easy",
+      "prompt": "Create a vertical solid truncated cone with a 50 mm bottom diameter, a 24 mm top diameter, and a height of 40 mm. Center it on the origin, place its base at Z=0, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 50,
+            "y": 50,
+            "z": 40
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "taper_direction",
+          "criterion": "The cone tapers smoothly from the 50 mm base to the 24 mm top.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "primitive",
+        "cone",
+        "frustum"
+      ]
+    },
+    {
+      "id": "B015",
+      "title": "Regular hexagonal prism",
+      "category": "primitive",
+      "difficulty": "medium",
+      "prompt": "Create a vertical regular hexagonal prism 30 mm high, centered on the origin, with its bottom at Z=0 and a 40 mm circumscribed-circle diameter. Orient one pair of opposite vertices along X, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "x_and_height",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 40,
+            "z": 30
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "regular_hexagon",
+          "criterion": "The cross-section is a regular six-sided polygon with the requested orientation.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "primitive",
+        "polygon",
+        "hexagonal_prism"
+      ]
+    },
+    {
+      "id": "B016",
+      "title": "Triangular wedge prism",
+      "category": "primitive",
+      "difficulty": "medium",
+      "prompt": "Create one right-triangular wedge prism with an overall X length of 70 mm, Y width of 30 mm, and Z height of 25 mm. Keep its rectangular bottom at Z=0, make the top slope from 25 mm high at X=-35 mm to zero at X=35 mm, center it in Y, and use named parameters.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 70,
+            "y": 30,
+            "z": 25
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "single_sloped_face",
+          "criterion": "The wedge has one continuous planar slope descending along positive X.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "primitive",
+        "wedge",
+        "triangular_prism"
+      ]
+    },
+    {
+      "id": "B017",
+      "title": "Four-hole counterbored plate",
+      "category": "holes_and_slots",
+      "difficulty": "hard",
+      "prompt": "Create an 80 x 50 x 12 mm plate with its bottom at Z=0. Add four 6 mm through holes at X=+-30 mm and Y=+-15 mm, and add a 12 mm diameter by 4 mm deep counterbore from the top around every hole. Use named parameters and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 80,
+            "y": 50,
+            "z": 12
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "through_holes",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 4,
+          "diameter_mm": 6,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        },
+        {
+          "id": "counterbores",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 4,
+          "diameter_mm": 12,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": false
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "counterbore_depth",
+          "criterion": "Each 12 mm counterbore is concentric with a through hole and 4 mm deep.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "holes",
+        "counterbore",
+        "plate",
+        "four_hole_pattern"
+      ]
+    },
+    {
+      "id": "B018",
+      "title": "Blind-hole bolt circle block",
+      "category": "holes_and_slots",
+      "difficulty": "hard",
+      "prompt": "Create a 60 x 60 x 20 mm square block centered in X and Y with its bottom at Z=0. Drill four 8 mm diameter blind holes 12 mm deep from the top, equally spaced on a 40 mm pitch circle. Use named parameters and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 60,
+            "y": 60,
+            "z": 20
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "blind_bolt_circle",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 4,
+          "diameter_mm": 8,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": false,
+          "pitch_circle_diameter_mm": 40,
+          "position_tolerance_mm": 0.5
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "blind_depth",
+          "criterion": "All four blind holes start at the top face and are 12 mm deep.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "holes",
+        "blind_holes",
+        "pcd",
+        "block"
+      ]
+    },
+    {
+      "id": "B019",
+      "title": "Cross-drilled cylinder",
+      "category": "holes_and_slots",
+      "difficulty": "hard",
+      "prompt": "Create a vertical cylinder 40 mm in diameter and 50 mm high with its base at Z=0. Add one 8 mm through hole along X at Z=20 mm and one 6 mm through hole along Y at Z=35 mm. Keep both holes centered on the cylinder axis, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 40,
+            "y": 40,
+            "z": 50
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "x_cross_hole",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 8,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "x",
+          "through": true
+        },
+        {
+          "id": "y_cross_hole",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 6,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "y",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "cross_hole_heights",
+          "criterion": "The X-axis and Y-axis holes are centered at Z=20 mm and Z=35 mm respectively.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "holes",
+        "cross_drilling",
+        "cylinder",
+        "multiple_axes"
+      ]
+    },
+    {
+      "id": "B020",
+      "title": "Two-hole slotted link",
+      "category": "holes_and_slots",
+      "difficulty": "medium",
+      "prompt": "Create a 120 x 40 x 10 mm solid link plate with semicircular outer ends and its bottom at Z=0. Add two 8 mm through holes centered 45 mm to either side of the origin, plus one centered 36 mm long by 12 mm wide through slot oriented along X. Use named parameters.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 120,
+            "y": 40,
+            "z": 10
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "end_holes",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 2,
+          "diameter_mm": 8,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "slot_geometry",
+          "criterion": "The centered through slot is 36 mm long, 12 mm wide, and aligned with X.",
+          "scale": "0_to_2",
+          "required": true
+        }
+      ],
+      "tags": [
+        "holes",
+        "slot",
+        "link_plate",
+        "rounded_ends"
+      ]
+    },
+    {
+      "id": "B021",
+      "title": "Cylindrical thin-wall cup",
+      "category": "thin_wall",
+      "difficulty": "medium",
+      "prompt": "Create an open-top cylindrical cup with a 60 mm outer diameter, 70 mm outer height, 3 mm side wall, and 5 mm bottom. Center it on the origin with its bottom at Z=0, use named parameters, and return one watertight solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 60,
+            "y": 60,
+            "z": 70
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "cup_wall",
+          "criterion": "The cup is open at the top with a 3 mm wall and a 5 mm bottom.",
+          "scale": "0_to_2",
+          "required": true
+        }
+      ],
+      "tags": [
+        "thin_wall",
+        "cup",
+        "open_top",
+        "cylindrical"
+      ]
+    },
+    {
+      "id": "B022",
+      "title": "Shallow rectangular tray",
+      "category": "thin_wall",
+      "difficulty": "medium",
+      "prompt": "Create an open-top rectangular tray with outer dimensions 120 x 80 x 18 mm, 2.5 mm side walls, and a 3 mm bottom. Center it in X and Y, place its bottom at Z=0, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 120,
+            "y": 80,
+            "z": 18
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "centered_bottom",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "x": -60,
+            "y": -40,
+            "z": 0
+          },
+          "expected_max_mm": {
+            "x": 60,
+            "y": 40
+          },
+          "absolute_tolerance_mm": 0.6,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "tray_cavity",
+          "criterion": "The tray has an open top, a usable cavity, and the specified wall and bottom thicknesses.",
+          "scale": "0_to_2",
+          "required": true
+        }
+      ],
+      "tags": [
+        "thin_wall",
+        "tray",
+        "shell",
+        "rectangular"
+      ]
+    },
+    {
+      "id": "B023",
+      "title": "Electronics shell with cable opening",
+      "category": "thin_wall",
+      "difficulty": "hard",
+      "prompt": "Create an open-top electronics enclosure with outside dimensions 100 x 70 x 40 mm, 3 mm walls, and a 3 mm bottom at Z=0. Add one 12 mm circular through cable opening centered on the negative-X wall at Z=18 mm. Use named parameters and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 100,
+            "y": 70,
+            "z": 40
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "cable_opening",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 12,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "x",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "shell_and_opening",
+          "criterion": "The top is open and the cable hole is centered on the negative-X wall at the requested height.",
+          "scale": "0_to_2",
+          "required": true
+        }
+      ],
+      "tags": [
+        "thin_wall",
+        "electronics_enclosure",
+        "side_hole",
+        "shell"
+      ]
+    },
+    {
+      "id": "B024",
+      "title": "Open-ended square tube",
+      "category": "thin_wall",
+      "difficulty": "medium",
+      "prompt": "Create a straight square tube with a 50 x 50 mm outside cross-section, 4 mm uniform walls, and an 80 mm length along Z. Keep both ends open, center it on the origin, place its bottom at Z=0, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 50,
+            "y": 50,
+            "z": 80
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "tube_openings",
+          "criterion": "Both tube ends are open and all four walls are uniformly 4 mm thick.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "thin_wall",
+        "square_tube",
+        "open_ends",
+        "uniform_wall"
+      ]
+    },
+    {
+      "id": "B025",
+      "title": "Thin-wall bottle shell",
+      "category": "thin_wall",
+      "difficulty": "hard",
+      "prompt": "Create one hollow axisymmetric bottle shell based at Z=0. Use a 50 mm diameter body, taper through a shoulder to a 24 mm diameter neck, make the total height 80 mm, use a 2 mm wall, and leave the neck open. Use a revolved profile and named parameters.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 50,
+            "y": 50,
+            "z": 80
+          },
+          "absolute_tolerance_mm": 0.6,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "bottle_shell",
+          "criterion": "The bottle has a hollow 2 mm wall, a smooth shoulder, and an open neck.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "thin_wall",
+        "bottle",
+        "revolved_shell",
+        "open_neck"
+      ]
+    },
+    {
+      "id": "B026",
+      "title": "Flanged bored axle",
+      "category": "revolved",
+      "difficulty": "hard",
+      "prompt": "Create one revolved axle aligned with X and spanning X=0 to X=80 mm. Use a 30 mm diameter shaft and a 50 mm diameter by 10 mm thick flange at X=0. Cut a concentric 10 mm bore through the full length, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 80,
+            "y": 50,
+            "z": 50
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "starts_at_x0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "x": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "axial_bore",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 10,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "x",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "flange_profile",
+          "criterion": "The axle has a distinct 50 mm flange and a coaxial 30 mm shaft.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "revolve",
+        "axle",
+        "flange",
+        "axial_bore"
+      ]
+    },
+    {
+      "id": "B027",
+      "title": "Grooved pulley wheel",
+      "category": "revolved",
+      "difficulty": "hard",
+      "prompt": "Create a revolved pulley wheel aligned with Z, 80 mm in outer diameter and 20 mm thick with its bottom at Z=0. Cut a 12 mm concentric through bore and two equal circumferential V-grooves around the rim. Use named parameters and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 80,
+            "y": 80,
+            "z": 20
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "central_bore",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 12,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "rim_grooves",
+          "criterion": "Two distinct equal V-grooves are revolved continuously around the pulley rim.",
+          "scale": "0_to_2",
+          "required": true
+        }
+      ],
+      "tags": [
+        "revolve",
+        "pulley",
+        "v_groove",
+        "bore"
+      ]
+    },
+    {
+      "id": "B028",
+      "title": "Chamfered spacer ring",
+      "category": "revolved",
+      "difficulty": "medium",
+      "prompt": "Create a cylindrical spacer ring 36 mm in outer diameter and 25 mm high, based at Z=0, with a concentric 16 mm through bore. Apply 2 mm chamfers to both outer circular edges, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 36,
+            "y": 36,
+            "z": 25
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "central_bore",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 16,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "outer_chamfers",
+          "criterion": "Both outside circular edges have matching 2 mm chamfers.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "revolve",
+        "spacer",
+        "ring",
+        "chamfer"
+      ]
+    },
+    {
+      "id": "B029",
+      "title": "Stepped nozzle with bore",
+      "category": "revolved",
+      "difficulty": "hard",
+      "prompt": "Create a revolved nozzle aligned with Z and based at Z=0. Make a 44 mm diameter by 12 mm high base, a tapered middle that narrows to 18 mm diameter, and a straight 18 mm diameter outlet so the total height is 70 mm. Cut one 6 mm bore through the full height and use named parameters.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 44,
+            "y": 44,
+            "z": 70
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "axial_bore",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 6,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "nozzle_profile",
+          "criterion": "The revolved profile contains a base, a smooth taper, and a straight outlet section.",
+          "scale": "0_to_2",
+          "required": true
+        }
+      ],
+      "tags": [
+        "revolve",
+        "nozzle",
+        "taper",
+        "through_bore"
+      ]
+    },
+    {
+      "id": "B030",
+      "title": "Curved-profile solid vase",
+      "category": "revolved",
+      "difficulty": "hard",
+      "prompt": "Create a solid decorative vase form by revolving a smooth closed profile around Z. It must be based at Z=0, exactly 90 mm high, reach a maximum diameter of 60 mm around its lower half, narrow to a 30 mm top diameter, use named profile parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 60,
+            "y": 60,
+            "z": 90
+          },
+          "absolute_tolerance_mm": 0.8,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "smooth_vase_profile",
+          "criterion": "The revolved outside profile is smooth, vase-like, and narrows to the requested top.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "revolve",
+        "vase",
+        "curved_profile",
+        "decorative"
+      ]
+    },
+    {
+      "id": "B031",
+      "title": "Three-port manifold block",
+      "category": "complex_boolean",
+      "difficulty": "complex",
+      "prompt": "Create one 100 x 60 x 40 mm manifold block with its bottom at Z=0. Cut one 16 mm through passage along X centered at Y=0, Z=20 mm, and two 10 mm through ports along Z centered at X=-25 mm and X=25 mm, Y=0. The ports may intersect the main passage. Use named parameters.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 100,
+            "y": 60,
+            "z": 40
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "main_passage",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 16,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "x",
+          "through": true
+        },
+        {
+          "id": "vertical_ports",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 2,
+          "diameter_mm": 10,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "passage_intersections",
+          "criterion": "Both vertical ports connect internally to the longitudinal manifold passage.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "complex_boolean",
+        "manifold",
+        "intersecting_holes",
+        "multi_axis"
+      ]
+    },
+    {
+      "id": "B032",
+      "title": "Twelve-hole perforated plate",
+      "category": "complex_boolean",
+      "difficulty": "hard",
+      "prompt": "Create a 120 x 80 x 8 mm plate based at Z=0. Cut twelve 6 mm through holes in a centered 4-column by 3-row rectangular grid with 25 mm X spacing and 22 mm Y spacing. Use named parameters, generate the pattern programmatically, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 120,
+            "y": 80,
+            "z": 8
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "hole_grid",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 12,
+          "diameter_mm": 6,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "grid_layout",
+          "criterion": "The twelve holes form a centered 4 by 3 grid with the requested spacings.",
+          "scale": "0_to_2",
+          "required": true
+        }
+      ],
+      "tags": [
+        "complex_boolean",
+        "hole_grid",
+        "pattern",
+        "perforated_plate"
+      ]
+    },
+    {
+      "id": "B033",
+      "title": "Slotted clevis block",
+      "category": "complex_boolean",
+      "difficulty": "hard",
+      "prompt": "Create one clevis block with an overall 70 x 40 x 40 mm envelope and bottom at Z=0. Cut a centered 30 mm wide slot down from the top to Z=12 mm, leaving two arms. Drill one 10 mm through pin hole along Y through both arms at X=0, Z=28 mm. Use named parameters.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 70,
+            "y": 40,
+            "z": 40
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "pin_hole",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 10,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "y",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "clevis_slot",
+          "criterion": "The centered slot reaches Z=12 mm and leaves two connected clevis arms.",
+          "scale": "0_to_2",
+          "required": true
+        }
+      ],
+      "tags": [
+        "complex_boolean",
+        "clevis",
+        "slot",
+        "cross_hole"
+      ]
+    },
+    {
+      "id": "B034",
+      "title": "Pipe saddle mounting block",
+      "category": "complex_boolean",
+      "difficulty": "complex",
+      "prompt": "Create one 80 x 60 x 30 mm mounting block with its bottom at Z=0. Cut a centered 40 mm diameter half-cylindrical saddle groove along X into the top, and add four 6 mm vertical through mounting holes near the corners. Use named parameters and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 80,
+            "y": 60,
+            "z": 30
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "mounting_holes",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 4,
+          "diameter_mm": 6,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "saddle_groove",
+          "criterion": "A centered 40 mm diameter half-cylinder groove runs continuously along X on the top.",
+          "scale": "0_to_2",
+          "required": true
+        }
+      ],
+      "tags": [
+        "complex_boolean",
+        "saddle",
+        "mounting_block",
+        "cylindrical_cut"
+      ]
+    },
+    {
+      "id": "B035",
+      "title": "Vented cover plate",
+      "category": "complex_boolean",
+      "difficulty": "hard",
+      "prompt": "Create a 100 x 70 x 6 mm cover plate at Z=0. Cut five parallel 40 x 5 mm through ventilation slots oriented along X and equally spaced along Y, plus four 5 mm through screw holes near the corners. Use named parameters and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 100,
+            "y": 70,
+            "z": 6
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "screw_holes",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 4,
+          "diameter_mm": 5,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "vent_slots",
+          "criterion": "Five equal 40 by 5 mm through slots are parallel and evenly spaced along Y.",
+          "scale": "0_to_2",
+          "required": true
+        }
+      ],
+      "tags": [
+        "complex_boolean",
+        "vent_slots",
+        "cover_plate",
+        "multiple_cuts"
+      ]
+    },
+    {
+      "id": "B036",
+      "title": "Swept ninety-degree pipe",
+      "category": "curved_surface",
+      "difficulty": "complex",
+      "prompt": "Create one solid 12 mm diameter round pipe by sweeping a circular profile along a planar path with a straight 60 mm segment, a tangent 30 mm radius 90-degree bend, and a final straight 40 mm segment. Keep the sweep untwisted, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "sweep_path",
+          "criterion": "The round sweep follows both straight segments and a tangent 30 mm radius quarter bend without twisting.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "curved_surface",
+        "sweep",
+        "pipe",
+        "tangent_bend"
+      ]
+    },
+    {
+      "id": "B037",
+      "title": "Rotated rectangular loft",
+      "category": "curved_surface",
+      "difficulty": "hard",
+      "prompt": "Create one lofted solid 60 mm high from a centered 50 x 30 mm rectangle at Z=0 to a centered 30 x 18 mm rectangle at Z=60 rotated 30 degrees around Z. Keep the transition smooth and untwisted, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "length_and_height",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 50,
+            "z": 60
+          },
+          "absolute_tolerance_mm": 0.7,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "loft_rotation",
+          "criterion": "The top rectangle is visibly rotated 30 degrees and joined by a smooth non-self-intersecting loft.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "curved_surface",
+        "loft",
+        "rotation",
+        "rectangular_profiles"
+      ]
+    },
+    {
+      "id": "B038",
+      "title": "Tapered wing loft",
+      "category": "curved_surface",
+      "difficulty": "complex",
+      "prompt": "Create one simplified wing solid spanning 120 mm along Y. At Y=0 use an 80 mm chord, 12 mm thick symmetric airfoil-like profile; at Y=120 use a 35 mm chord, 5 mm thick profile with 8 degrees of washout. Keep the final bounding box 80 x 120 x 12 mm and use named parameters.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 80,
+            "y": 120,
+            "z": 12
+          },
+          "absolute_tolerance_mm": 1.0,
+          "relative_tolerance": 0.015
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "wing_taper_twist",
+          "criterion": "The loft narrows toward the tip and visibly includes the requested washout without self-intersection.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "curved_surface",
+        "wing",
+        "loft",
+        "washout"
+      ]
+    },
+    {
+      "id": "B039",
+      "title": "Swept U-shaped handle",
+      "category": "curved_surface",
+      "difficulty": "hard",
+      "prompt": "Create one U-shaped solid handle from an 8 mm circular sweep. The final outside envelope must measure exactly 80 mm in X, 8 mm in Y, and 50 mm in Z, with two equal vertical legs joined by a tangent semicircular top. Put both leg bottoms at Z=0 and use named parameters.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 80,
+            "y": 8,
+            "z": 50
+          },
+          "absolute_tolerance_mm": 0.8,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "bottom_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "handle_continuity",
+          "criterion": "The two equal legs and tangent curved top form one smooth continuous handle.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "curved_surface",
+        "sweep",
+        "handle",
+        "u_shape"
+      ]
+    },
+    {
+      "id": "B040",
+      "title": "Spherical domed cap",
+      "category": "curved_surface",
+      "difficulty": "hard",
+      "prompt": "Create one solid circular cap based at Z=0 with a 60 mm outside diameter, a 10 mm high cylindrical skirt, and a smooth spherical dome reaching an exact total height of 35 mm. Keep the dome tangent to the skirt, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 60,
+            "y": 60,
+            "z": 35
+          },
+          "absolute_tolerance_mm": 0.7,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "dome_tangency",
+          "criterion": "The spherical dome joins the cylindrical skirt smoothly without a visible step or crease.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "curved_surface",
+        "dome",
+        "sphere",
+        "tangent_transition"
+      ]
+    },
+    {
+      "id": "B041",
+      "title": "Wheel and axle assembly",
+      "category": "assembly",
+      "difficulty": "hard",
+      "prompt": "Create a CadQuery Assembly with exactly three solids: one 100 mm long by 12 mm diameter axle aligned with X, and two 50 mm diameter by 10 mm thick wheels aligned with X near the axle ends. Put the wheel bottoms at Z=0, make the total envelope exactly 100 x 50 x 50 mm, use named parameters, and assign the Assembly to result.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 100,
+            "y": 50,
+            "z": 50
+          },
+          "absolute_tolerance_mm": 0.8,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "bottom_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "three_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 3
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "wheel_symmetry",
+          "criterion": "Two equal wheels are symmetrically placed near the ends of one centered axle.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "assembly",
+        "wheel",
+        "axle",
+        "three_components"
+      ]
+    },
+    {
+      "id": "B042",
+      "title": "Three-part hinge assembly",
+      "category": "assembly",
+      "difficulty": "complex",
+      "prompt": "Create a CadQuery Assembly with exactly three separate solids: two interleaving hinge leaves and one cylindrical hinge pin. Keep the complete envelope exactly 80 x 50 x 12 mm, align the pin with X, center the assembly in X and Y with its bottom at Z=0, use named parameters, and assign it to result.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 80,
+            "y": 50,
+            "z": 12
+          },
+          "absolute_tolerance_mm": 0.8,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "three_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 3
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "hinge_relationship",
+          "criterion": "The leaves interleave around one X-axis pin and are arranged like a functional hinge.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "assembly",
+        "hinge",
+        "pin",
+        "interleaving"
+      ]
+    },
+    {
+      "id": "B043",
+      "title": "Five-part table assembly",
+      "category": "assembly",
+      "difficulty": "hard",
+      "prompt": "Create a CadQuery Assembly representing a simple table with exactly five solids: one 100 x 60 x 5 mm tabletop and four equal square legs. Place the feet at Z=0, make the total envelope exactly 100 x 60 x 75 mm, arrange the legs symmetrically near the corners, use named parameters, and assign the Assembly to result.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 100,
+            "y": 60,
+            "z": 75
+          },
+          "absolute_tolerance_mm": 0.8,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "feet_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "five_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 5
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "table_layout",
+          "criterion": "Four equal legs support one tabletop and are symmetrically positioned near its corners.",
+          "scale": "0_to_2",
+          "required": true
+        }
+      ],
+      "tags": [
+        "assembly",
+        "table",
+        "five_components",
+        "furniture"
+      ]
+    },
+    {
+      "id": "B044",
+      "title": "Five-part bearing housing assembly",
+      "category": "assembly",
+      "difficulty": "complex",
+      "prompt": "Create a CadQuery Assembly with exactly five solids: one 90 x 60 x 8 mm base, one central bearing-housing body, one 90 mm shaft aligned with X through the body, and two equal end caps. Put the base at Z=0, keep the complete envelope exactly 90 x 60 x 50 mm, use named parameters, and assign the Assembly to result.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 90,
+            "y": 60,
+            "z": 50
+          },
+          "absolute_tolerance_mm": 0.9,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "five_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 5
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "housing_roles",
+          "criterion": "The central housing, X-axis shaft, paired end caps, and base are visibly distinct components.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "assembly",
+        "bearing_housing",
+        "shaft",
+        "five_components"
+      ]
+    },
+    {
+      "id": "B045",
+      "title": "Five-part parallel gripper",
+      "category": "assembly",
+      "difficulty": "complex",
+      "prompt": "Create a CadQuery Assembly for a simplified parallel gripper with exactly five solids: one palm, two equal opposing fingers, and two cylindrical pivot pins. Keep the complete envelope exactly 100 x 60 x 20 mm, make the fingers symmetric about Y=0, align both pins with Z, use named parameters, and assign the Assembly to result.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 100,
+            "y": 60,
+            "z": 20
+          },
+          "absolute_tolerance_mm": 0.9,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "five_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 5
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "gripper_layout",
+          "criterion": "Two opposing symmetric fingers attach to one palm with one pivot pin per finger.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "assembly",
+        "gripper",
+        "symmetry",
+        "pivot_pins"
+      ]
+    },
+    {
+      "id": "B046",
+      "title": "Ambiguous ergonomic doorstop",
+      "category": "ambiguous",
+      "difficulty": "medium",
+      "prompt": "Create a practical ergonomic doorstop as one 3D-printable solid. It should work under a typical interior door, resist sliding, avoid sharp corners, and expose sensible named parameters. Choose reasonable dimensions because no door clearance is provided.",
+      "expected_behavior": "generate_with_reasonable_assumptions",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "single_printable_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "doorstop_assumptions",
+          "criterion": "The chosen dimensions, wedge angle, grip features, and edge treatment are plausible for a typical door.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "ambiguous",
+        "doorstop",
+        "assumptions",
+        "3d_printing"
+      ]
+    },
+    {
+      "id": "B047",
+      "title": "Ambiguous wall hook",
+      "category": "ambiguous",
+      "difficulty": "medium",
+      "prompt": "Create a compact single-piece wall hook that is exactly 30 mm wide along X and suitable for a light household item. Choose a reasonable height, projection, mounting region, fillets, and thickness, keep the design printable, and expose all choices as named parameters.",
+      "expected_behavior": "generate_with_reasonable_assumptions",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "specified_width",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 30
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_printable_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "hook_assumptions",
+          "criterion": "The unspecified projection, height, thickness, and mounting shape are practical and internally consistent.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "ambiguous",
+        "wall_hook",
+        "partial_dimension",
+        "assumptions"
+      ]
+    },
+    {
+      "id": "B048",
+      "title": "Ambiguous phone stand",
+      "category": "ambiguous",
+      "difficulty": "medium",
+      "prompt": "Create a one-piece desk stand for a typical modern smartphone. Make its base exactly 90 mm long along X, then choose a reasonable width, viewing angle, back support, front lip, and charging-cable opening. Keep it stable, printable, and controlled by named parameters.",
+      "expected_behavior": "generate_with_reasonable_assumptions",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "base_length",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 90
+          },
+          "absolute_tolerance_mm": 0.6,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_printable_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "stand_function",
+          "criterion": "The chosen angle, support, lip, and cable access form a plausible stable phone stand.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "ambiguous",
+        "phone_stand",
+        "functional",
+        "partial_dimension"
+      ]
+    },
+    {
+      "id": "B049",
+      "title": "Ambiguous small-parts bin",
+      "category": "ambiguous",
+      "difficulty": "medium",
+      "prompt": "Create an open-top storage bin for small screws with an exact outside length of 100 mm along X. Choose a sensible width, height, wall thickness, bottom thickness, corner radii, and optional label area. Use one printable solid and named parameters.",
+      "expected_behavior": "generate_with_reasonable_assumptions",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "specified_length",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 100
+          },
+          "absolute_tolerance_mm": 0.6,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_printable_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "bin_assumptions",
+          "criterion": "The unspecified dimensions and wall choices create a usable open-top small-parts bin.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "ambiguous",
+        "storage_bin",
+        "open_top",
+        "assumptions"
+      ]
+    },
+    {
+      "id": "B050",
+      "title": "Ambiguous hand knob",
+      "category": "ambiguous",
+      "difficulty": "medium",
+      "prompt": "Create a comfortable single-piece hand knob for a 6 mm round shaft. Choose a reasonable outside diameter, height, grip shape, fillets, and blind-hole depth, but keep one concentric 6 mm blind shaft hole aligned with Z. Use named parameters and make the part printable.",
+      "expected_behavior": "generate_with_reasonable_assumptions",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "single_printable_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "shaft_hole",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 6,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": false
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "knob_assumptions",
+          "criterion": "The chosen knob proportions, grip treatment, and blind-hole depth are practical for hand use.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "ambiguous",
+        "knob",
+        "blind_hole",
+        "ergonomic"
+      ]
+    },
+    {
+      "id": "B051",
+      "title": "Conflicting cylinder radius",
+      "category": "conflicting",
+      "difficulty": "easy",
+      "prompt": "Create one vertical cylinder that must have a diameter of exactly 40 mm and a radius of exactly 30 mm at the same time. Its height is 50 mm and both radial requirements are mandatory. Do not silently choose one; request clarification before generating code.",
+      "expected_behavior": "clarify_before_generation",
+      "parameterization_required": false,
+      "constraints": [],
+      "manual_checks": [
+        {
+          "id": "conflict_recognition",
+          "criterion": "The system identifies that diameter 40 mm conflicts with radius 30 mm.",
+          "scale": "binary",
+          "required": true
+        },
+        {
+          "id": "clarification_request",
+          "criterion": "The system requests clarification instead of generating one interpretation.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "conflict",
+        "radius_diameter",
+        "clarification"
+      ]
+    },
+    {
+      "id": "B052",
+      "title": "Conflicting plate thickness",
+      "category": "conflicting",
+      "difficulty": "easy",
+      "prompt": "Create a 90 x 60 mm rectangular plate whose thickness must be exactly 5 mm and exactly 10 mm simultaneously. Both thickness requirements are mandatory and refer to the same plate. Do not pick one value; identify the conflict and request clarification.",
+      "expected_behavior": "clarify_before_generation",
+      "parameterization_required": false,
+      "constraints": [],
+      "manual_checks": [
+        {
+          "id": "conflict_recognition",
+          "criterion": "The system identifies the two incompatible mandatory thickness values.",
+          "scale": "binary",
+          "required": true
+        },
+        {
+          "id": "clarification_request",
+          "criterion": "The system requests a single valid thickness before generation.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "conflict",
+        "thickness",
+        "clarification"
+      ]
+    },
+    {
+      "id": "B053",
+      "title": "Conflicting hole count",
+      "category": "conflicting",
+      "difficulty": "medium",
+      "prompt": "Create one circular flange with a single bolt circle that must contain exactly four holes and exactly six holes at the same time. The same pattern cannot be split into multiple circles, and both counts are mandatory. Identify the conflict and ask for clarification before code generation.",
+      "expected_behavior": "clarify_before_generation",
+      "parameterization_required": false,
+      "constraints": [],
+      "manual_checks": [
+        {
+          "id": "conflict_recognition",
+          "criterion": "The system identifies that one bolt circle cannot simultaneously have exactly four and six holes.",
+          "scale": "binary",
+          "required": true
+        },
+        {
+          "id": "clarification_request",
+          "criterion": "The system asks which mandatory hole count should be retained.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "conflict",
+        "hole_count",
+        "bolt_circle",
+        "clarification"
+      ]
+    },
+    {
+      "id": "B054",
+      "title": "Conflicting assembly component count",
+      "category": "conflicting",
+      "difficulty": "medium",
+      "prompt": "Create an Assembly that must contain exactly three components, while also requiring one base, two posts, and one top bar as four separate mandatory components. Components may not be merged. Identify the component-count conflict and request clarification before generating code.",
+      "expected_behavior": "clarify_before_generation",
+      "parameterization_required": false,
+      "constraints": [],
+      "manual_checks": [
+        {
+          "id": "conflict_recognition",
+          "criterion": "The system identifies that the mandatory component list contains four parts rather than three.",
+          "scale": "binary",
+          "required": true
+        },
+        {
+          "id": "clarification_request",
+          "criterion": "The system requests correction of either the count or the component list.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "conflict",
+        "assembly",
+        "component_count",
+        "clarification"
+      ]
+    },
+    {
+      "id": "B055",
+      "title": "Conflicting solid connectivity",
+      "category": "conflicting",
+      "difficulty": "hard",
+      "prompt": "Create a result that must be exactly one connected solid and must also be exactly two disconnected solids separated by a 10 mm air gap. Both topology requirements are mandatory for the same final result. Do not choose one; explain the conflict and request clarification.",
+      "expected_behavior": "clarify_before_generation",
+      "parameterization_required": false,
+      "constraints": [],
+      "manual_checks": [
+        {
+          "id": "conflict_recognition",
+          "criterion": "The system identifies that one connected solid cannot also be two separated solids.",
+          "scale": "binary",
+          "required": true
+        },
+        {
+          "id": "clarification_request",
+          "criterion": "The system requests a consistent topology requirement before generation.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "conflict",
+        "topology",
+        "solid_count",
+        "clarification"
+      ]
+    },
+    {
+      "id": "B056",
+      "title": "Simplified airplane assembly",
+      "category": "out_of_distribution",
+      "difficulty": "complex",
+      "prompt": "Create a recognizable simplified airplane as a CadQuery Assembly with exactly five solids: one fuselage, separate left and right wings, one horizontal tail, and one vertical tail. Point it along +X. The final exported bounding box must measure exactly 140 x 120 x 35 mm, use named parameters, and assign the Assembly to result.",
+      "expected_behavior": "best_effort_generation",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 140,
+            "y": 120,
+            "z": 35
+          },
+          "absolute_tolerance_mm": 1.4,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "five_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 5
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "airplane_recognizability",
+          "criterion": "The model is recognizable as an airplane with plausible wing and tail placement.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "out_of_distribution",
+        "airplane",
+        "assembly",
+        "recognizability"
+      ]
+    },
+    {
+      "id": "B057",
+      "title": "Simplified car assembly",
+      "category": "out_of_distribution",
+      "difficulty": "complex",
+      "prompt": "Create a recognizable simplified car as a CadQuery Assembly with exactly six solids: one chassis, one cabin, and four separate wheels whose axes align with Y. Point the car along +X. The final exported bounding box must measure exactly 120 x 60 x 45 mm, use named parameters, and assign the Assembly to result.",
+      "expected_behavior": "best_effort_generation",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 120,
+            "y": 60,
+            "z": 45
+          },
+          "absolute_tolerance_mm": 1.2,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "six_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 6
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "car_recognizability",
+          "criterion": "The chassis, cabin, and four wheel arrangement are visually recognizable as a car.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "out_of_distribution",
+        "car",
+        "assembly",
+        "wheels"
+      ]
+    },
+    {
+      "id": "B058",
+      "title": "Simplified desk fan assembly",
+      "category": "out_of_distribution",
+      "difficulty": "complex",
+      "prompt": "Create a recognizable simplified desk fan as a CadQuery Assembly with exactly eight solids: one base, one stand, one motor housing, one central hub, and four separate blades. Point the fan axis along Y. The final bounding box must measure exactly 80 x 30 x 110 mm, use named parameters, and assign the Assembly to result.",
+      "expected_behavior": "best_effort_generation",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 80,
+            "y": 30,
+            "z": 110
+          },
+          "absolute_tolerance_mm": 1.1,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "eight_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 8
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "fan_recognizability",
+          "criterion": "The base, stand, housing, hub, and four radial blades are recognizable as a desk fan.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "out_of_distribution",
+        "desk_fan",
+        "assembly",
+        "blades"
+      ]
+    },
+    {
+      "id": "B059",
+      "title": "Simplified suspension bridge assembly",
+      "category": "out_of_distribution",
+      "difficulty": "complex",
+      "prompt": "Create a recognizable simplified suspension bridge as a CadQuery Assembly with exactly seven solids: one deck, two towers, and four separate diagonal cable rods. Align the bridge along +X. The final exported bounding box must measure exactly 180 x 50 x 80 mm, use named parameters, and assign the Assembly to result.",
+      "expected_behavior": "best_effort_generation",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 180,
+            "y": 50,
+            "z": 80
+          },
+          "absolute_tolerance_mm": 1.8,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "seven_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 7
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "bridge_recognizability",
+          "criterion": "The deck, paired towers, and symmetric cable rods are recognizable as a suspension bridge.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "out_of_distribution",
+        "bridge",
+        "assembly",
+        "towers"
+      ]
+    },
+    {
+      "id": "B060",
+      "title": "Simplified rocket assembly",
+      "category": "out_of_distribution",
+      "difficulty": "complex",
+      "prompt": "Create a recognizable simplified rocket as a CadQuery Assembly aligned with +Z and containing exactly six solids: one cylindrical body, one nose cone, three separate fins, and one nozzle. Put its bottom at Z=0. The final bounding box must measure exactly 60 x 60 x 160 mm, use named parameters, and assign the Assembly to result.",
+      "expected_behavior": "best_effort_generation",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 60,
+            "y": 60,
+            "z": 160
+          },
+          "absolute_tolerance_mm": 1.6,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "bottom_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "six_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 6
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "rocket_recognizability",
+          "criterion": "The body, nose, three evenly distributed fins, and nozzle are recognizable as a rocket.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "out_of_distribution",
+        "rocket",
+        "assembly",
+        "fins"
+      ]
+    },
+    {
+      "id": "B061",
+      "title": "Centered solid sphere",
+      "category": "primitive",
+      "difficulty": "easy",
+      "prompt": "Create one solid sphere with an exact diameter of 42 mm and its center at the global origin. Use a named diameter parameter and return one solid with an exact 42 x 42 x 42 mm bounding box.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 42,
+            "y": 42,
+            "z": 42
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "centered_at_origin",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "x": -21,
+            "y": -21,
+            "z": -21
+          },
+          "expected_max_mm": {
+            "x": 21,
+            "y": 21,
+            "z": 21
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "spherical_form",
+          "criterion": "The result is a complete smooth sphere without planar truncation or visible seams.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "primitive",
+        "sphere",
+        "origin"
+      ]
+    },
+    {
+      "id": "B062",
+      "title": "Parametric solid torus",
+      "category": "primitive",
+      "difficulty": "medium",
+      "prompt": "Create one solid torus centered on the global Z axis with a 28 mm major centerline radius and a 6 mm circular tube radius. Keep its symmetry plane at Z=0, use named parameters, and produce an exact 68 x 68 x 12 mm bounding box.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 68,
+            "y": 68,
+            "z": 12
+          },
+          "absolute_tolerance_mm": 0.6,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "centered_height",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": -6
+          },
+          "expected_max_mm": {
+            "z": 6
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "torus_form",
+          "criterion": "The result is a closed circular ring with a constant circular tube section and an open center.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "primitive",
+        "torus",
+        "ring"
+      ]
+    },
+    {
+      "id": "B063",
+      "title": "Dual-axis drilled angle bracket",
+      "category": "holes_and_slots",
+      "difficulty": "complex",
+      "prompt": "Create one L-shaped angle bracket with an exact 70 x 50 x 45 mm envelope and its base at Z=0. Use a 6 mm thick horizontal base and a 6 mm thick vertical flange along the positive-Y edge. Cut two 8 mm through holes along Z in the base at X=-22 mm and X=22 mm, and cut one 10 mm through hole along Y through the flange at X=0, Z=25 mm. Use named parameters and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 70,
+            "y": 50,
+            "z": 45
+          },
+          "absolute_tolerance_mm": 0.7,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "base_holes",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 2,
+          "diameter_mm": 8,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        },
+        {
+          "id": "flange_hole",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 10,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "y",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "hole_placement",
+          "criterion": "The two base holes are symmetric and the third hole passes through the vertical flange at the requested location.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "holes_and_slots",
+        "angle_bracket",
+        "multi_axis_holes"
+      ]
+    },
+    {
+      "id": "B064",
+      "title": "Five-hole asymmetric mounting plate",
+      "category": "holes_and_slots",
+      "difficulty": "medium",
+      "prompt": "Create one 100 x 60 x 10 mm rectangular mounting plate centered in X and Y with its bottom at Z=0. Cut one 20 mm central through hole and four 6 mm through holes at X=+/-35 mm and Y=+/-18 mm. Apply a 4 mm fillet to the four vertical outside corners, use named parameters, and return one solid.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 100,
+            "y": 60,
+            "z": 10
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        },
+        {
+          "id": "corner_holes",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 4,
+          "diameter_mm": 6,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        },
+        {
+          "id": "center_hole",
+          "type": "cylindrical_hole_pattern",
+          "hard": true,
+          "expected_count": 1,
+          "diameter_mm": 20,
+          "diameter_tolerance_mm": 0.3,
+          "axis": "z",
+          "through": true
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "pattern_and_fillets",
+          "criterion": "The four small holes form the specified symmetric rectangle and all four outside corners have matching fillets.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "holes_and_slots",
+        "mounting_plate",
+        "mixed_diameters",
+        "fillet"
+      ]
+    },
+    {
+      "id": "B065",
+      "title": "Thin-wall square-to-round transition duct",
+      "category": "thin_wall",
+      "difficulty": "complex",
+      "prompt": "Create one hollow square-to-round transition duct 60 mm high with a uniform nominal wall thickness of 2 mm. The lower outside opening is a 70 x 70 mm square at Z=0 and the upper outside opening is a 50 mm diameter circle at Z=60 mm. Keep both ends open, use named parameters, and maintain an exact 70 x 70 x 60 mm outside envelope.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 70,
+            "y": 70,
+            "z": 60
+          },
+          "absolute_tolerance_mm": 0.8,
+          "relative_tolerance": 0.012
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "open_uniform_shell",
+          "criterion": "Both ends are open and the transition has a plausible continuous 2 mm wall without self-intersection.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "thin_wall",
+        "duct",
+        "loft",
+        "square_to_round"
+      ]
+    },
+    {
+      "id": "B066",
+      "title": "Revolved chess pawn",
+      "category": "revolved",
+      "difficulty": "hard",
+      "prompt": "Create one recognizable chess pawn as a single revolved solid about the Z axis. Put its flat base at Z=0, make the exact overall diameter 40 mm and total height 70 mm, and include a broad base, narrow neck, and spherical-looking head joined into one solid. Build it from a named parametric profile.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 40,
+            "y": 40,
+            "z": 70
+          },
+          "absolute_tolerance_mm": 0.7,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "pawn_profile",
+          "criterion": "The rotational profile is smooth and recognizable as a chess pawn with base, neck, shoulder, and head.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "revolved",
+        "chess_pawn",
+        "profile",
+        "recognizability"
+      ]
+    },
+    {
+      "id": "B067",
+      "title": "Filleted die with recessed pips",
+      "category": "complex_boolean",
+      "difficulty": "complex",
+      "prompt": "Create one 30 mm die centered in X and Y with its bottom at Z=0. Fillet all outside edges by 3 mm and cut shallow 2.5 mm radius spherical pips on all six faces using the standard opposite-face layout: 1 opposite 6, 2 opposite 5, and 3 opposite 4. Use named parameters and return one solid with an exact 30 x 30 x 30 mm envelope.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 30,
+            "y": 30,
+            "z": 30
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "base_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "pip_layout",
+          "criterion": "All six faces carry recessed pips in the standard 1-through-6 die layout, totaling 21 visible depressions.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "complex_boolean",
+        "die",
+        "spherical_cuts",
+        "fillet"
+      ]
+    },
+    {
+      "id": "B068",
+      "title": "Single-turn helical tube",
+      "category": "curved_surface",
+      "difficulty": "complex",
+      "prompt": "Create one solid tube by sweeping a 6 mm diameter circular profile along a single-turn helix with a 25 mm centerline radius and 20 mm pitch. Align the helix with Z, translate it so the model bottom is at Z=0, use named parameters, and target an exact outside envelope of 56 x 56 x 26 mm.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_dimensions",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 56,
+            "y": 56,
+            "z": 26
+          },
+          "absolute_tolerance_mm": 1.2,
+          "relative_tolerance": 0.02
+        },
+        {
+          "id": "bottom_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.6,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "single_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "helix_continuity",
+          "criterion": "The circular section follows one smooth complete helical turn without gaps, flattening, or self-intersection.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "curved_surface",
+        "helix",
+        "sweep",
+        "tube"
+      ]
+    },
+    {
+      "id": "B069",
+      "title": "Four-part bench vise assembly",
+      "category": "assembly",
+      "difficulty": "complex",
+      "prompt": "Create a simplified bench vise as a CadQuery Assembly containing exactly four solids: one base with fixed jaw, one sliding jaw, one cylindrical lead screw along X, and one straight handle through the screw head. Arrange the jaws facing each other, use named parameters, assign the Assembly to result, and make the exact exported envelope 110 x 55 x 50 mm with its bottom at Z=0.",
+      "expected_behavior": "generate",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 110,
+            "y": 55,
+            "z": 50
+          },
+          "absolute_tolerance_mm": 1.1,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "bottom_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.5,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "four_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 4
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "vise_layout",
+          "criterion": "The fixed and moving jaws face each other and the lead screw and transverse handle form a recognizable bench vise.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "assembly",
+        "bench_vise",
+        "lead_screw",
+        "four_part"
+      ]
+    },
+    {
+      "id": "B070",
+      "title": "Ambiguous reusable cable reel",
+      "category": "ambiguous",
+      "difficulty": "medium",
+      "prompt": "Create a compact reusable cable reel as one 3D-printable solid. It should hold a typical short charging cable, keep the cable from slipping off, avoid sharp edges, and expose sensible named parameters. Choose reasonable dimensions and winding features because no cable diameter or length is provided.",
+      "expected_behavior": "generate_with_reasonable_assumptions",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "single_printable_solid",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 1
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "reel_assumptions",
+          "criterion": "The chosen size, hub, retaining flanges, and cable entry feature are plausible for a short charging cable.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "ambiguous",
+        "cable_reel",
+        "assumptions",
+        "3d_printing"
+      ]
+    },
+    {
+      "id": "B071",
+      "title": "Conflicting sphere placement",
+      "category": "conflicting",
+      "difficulty": "easy",
+      "prompt": "Create a 50 mm diameter sphere whose center must be exactly at the global origin and whose lowest point must simultaneously be exactly at Z=0. Both placement requirements are mandatory. Do not translate or reinterpret either condition; request clarification before generating code.",
+      "expected_behavior": "clarify_before_generation",
+      "parameterization_required": false,
+      "constraints": [],
+      "manual_checks": [
+        {
+          "id": "conflict_recognition",
+          "criterion": "The system identifies that an origin-centered 50 mm sphere has its lowest point at Z=-25 mm, not Z=0.",
+          "scale": "binary",
+          "required": true
+        },
+        {
+          "id": "clarification_request",
+          "criterion": "The system requests clarification instead of silently translating the sphere or violating one requirement.",
+          "scale": "binary",
+          "required": true
+        }
+      ],
+      "tags": [
+        "conflict",
+        "sphere",
+        "placement",
+        "clarification"
+      ]
+    },
+    {
+      "id": "B072",
+      "title": "Simplified robot arm assembly",
+      "category": "out_of_distribution",
+      "difficulty": "complex",
+      "prompt": "Create a recognizable simplified industrial robot arm as a CadQuery Assembly with exactly seven solids: one base, one rotating pedestal, one upper arm, one forearm, one wrist block, and two separate gripper fingers. Put the base bottom at Z=0, use named parameters, assign the Assembly to result, and make the exact exported envelope 120 x 80 x 180 mm.",
+      "expected_behavior": "best_effort_generation",
+      "parameterization_required": true,
+      "constraints": [
+        {
+          "id": "overall_envelope",
+          "type": "bbox_dimensions",
+          "hard": true,
+          "expected_mm": {
+            "x": 120,
+            "y": 80,
+            "z": 180
+          },
+          "absolute_tolerance_mm": 1.8,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "bottom_at_z0",
+          "type": "bbox_bounds",
+          "hard": true,
+          "expected_min_mm": {
+            "z": 0
+          },
+          "absolute_tolerance_mm": 0.6,
+          "relative_tolerance": 0.01
+        },
+        {
+          "id": "seven_solids",
+          "type": "solid_count",
+          "hard": true,
+          "expected": 7
+        }
+      ],
+      "manual_checks": [
+        {
+          "id": "robot_arm_recognizability",
+          "criterion": "The articulated pedestal, two arm links, wrist, and paired gripper fingers are recognizable as an industrial robot arm.",
+          "scale": "1_to_5",
+          "required": true
+        }
+      ],
+      "tags": [
+        "out_of_distribution",
+        "robot_arm",
+        "assembly",
+        "gripper"
+      ]
+    }
+  ]
+}

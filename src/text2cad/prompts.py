@@ -20,6 +20,15 @@ Rules:
 """
 
 
+CLARIFICATION_SYSTEM_PROMPT = """You assess natural-language CAD requests for internal consistency.
+
+The request may contain mutually incompatible mandatory requirements. If it does,
+identify the exact conflict and ask one concise clarification question. Do not
+choose one interpretation, generate CAD code, or propose corrected dimensions.
+Return natural-language text only.
+"""
+
+
 def build_user_prompt(description: str, reference_context: str | None = None) -> str:
     reference_section = ""
     if reference_context:
@@ -40,11 +49,35 @@ Remember: output only executable Python code and assign the final object to `res
 """
 
 
+def build_clarification_prompt(
+    description: str, reference_context: str | None = None
+) -> str:
+    reference_section = ""
+    if reference_context:
+        reference_section = f"""
+
+Retrieved CadQuery references:
+{reference_context}
+
+Use the references only to understand CAD terminology. Do not generate code.
+"""
+
+    return f"""Review this CAD request for mutually incompatible mandatory requirements:
+
+{description}
+{reference_section}
+
+Identify the conflict precisely and ask for the minimum clarification needed.
+Return natural-language text only.
+"""
+
+
 def build_repair_prompt(
     description: str,
     previous_code: str,
-    traceback: str,
+    feedback: str,
     reference_context: str | None = None,
+    repair_type: str = "execution",
 ) -> str:
     reference_section = ""
     if reference_context:
@@ -54,7 +87,27 @@ Relevant CadQuery references:
 {reference_context}
 """
 
-    return f"""The following CadQuery code failed when executed.
+    if repair_type == "execution":
+        failure_heading = "The following CadQuery code failed execution or artifact validation."
+        feedback_heading = "Execution traceback or artifact feedback"
+        repair_instruction = (
+            "Correct the execution/export failure while preserving all requirements "
+            "from the original request."
+        )
+    elif repair_type == "constraint":
+        failure_heading = (
+            "The following CadQuery code executed and exported, but failed one or "
+            "more automatic hard constraints."
+        )
+        feedback_heading = "Structured hard-constraint feedback"
+        repair_instruction = (
+            "Correct the measured geometric errors without removing requirements or "
+            "breaking constraints that already pass."
+        )
+    else:
+        raise ValueError(f"Unknown repair type: {repair_type}")
+
+    return f"""{failure_heading}
 
 Original CAD request:
 {description}
@@ -64,13 +117,14 @@ Failed code:
 {previous_code}
 ```
 
-Traceback:
+{feedback_heading}:
 ```text
-{traceback}
+{feedback}
 ```
 {reference_section}
 
-Please return a corrected complete CadQuery Python program.
+{repair_instruction}
+Please return a corrected complete CadQuery Python program, not a patch.
 Return only executable Python code. The final object must be assigned to `result`.
 """
 

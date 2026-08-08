@@ -12,7 +12,14 @@ Thumbs.db
 
 # Keep final experiment reports/figures, not machine-local raw runs and paths.
 experiments/**/results/raw/
+experiments/**/results/**/raw/
 experiments/**/results/records.json
+experiments/**/results/**/records.json
+experiments/**/results/**/repair_records.json
 experiments/**/results/results.csv
+experiments/**/results/**/results.csv
+experiments/**/results/**/repair_results.csv
 experiments/**/results/paired_results.csv
 experiments/**/results/**/comparison_*.png
+experiments/**/results/**/experiment.log
+experiments/**/results/**/experiment.pid

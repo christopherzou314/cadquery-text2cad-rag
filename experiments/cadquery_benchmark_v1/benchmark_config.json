@@ -1,0 +1,42 @@
+{
+  "benchmark_id": "cadquery_benchmark_v1",
+  "benchmark_version": "1.0.0",
+  "status": "completed",
+  "evaluation_schema_version": "2.0",
+  "target_case_count": 60,
+  "case_id_range": {"start": 13, "end": 72},
+  "conditions": [
+    "baseline",
+    "lightweight_rag",
+    "full_rag"
+  ],
+  "seeds": [101, 202, 303],
+  "repair_budget": 2,
+  "reported_curve": [0, 1, 2],
+  "clarification_protocol": {
+    "expected_behavior": "clarify_before_generation",
+    "cad_execution": false,
+    "repair_budget_applicable": false,
+    "automatic_score": "pending_manual_or_vlm"
+  },
+  "generation_controls": {
+    "same_model_across_conditions": true,
+    "same_system_prompt_across_conditions": true,
+    "same_temperature_across_conditions": true,
+    "send_seed_to_provider": true,
+    "condition_order": "balanced_rotation_by_case_and_seed"
+  },
+  "category_targets": {
+    "primitive": 6,
+    "holes_and_slots": 6,
+    "thin_wall": 6,
+    "revolved": 6,
+    "complex_boolean": 6,
+    "curved_surface": 6,
+    "assembly": 6,
+    "ambiguous": 6,
+    "conflicting": 6,
+    "out_of_distribution": 6
+  },
+  "initial_generation_count": 540
+}

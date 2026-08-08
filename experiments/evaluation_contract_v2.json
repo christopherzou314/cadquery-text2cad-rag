@@ -1,0 +1,50 @@
+{
+  "contract_id": "cadquery_evaluation_v2",
+  "schema_version": "2.0",
+  "status": "frozen",
+  "frozen_on": "2026-08-04",
+  "artifact_requirements": {
+    "step": "A non-empty STEP file must be exported.",
+    "stl": "A non-empty STL file must contain finite, non-degenerate mesh bounds.",
+    "artifact_success": "Final execution succeeds, STEP and STL exports exist, and STL geometry is valid."
+  },
+  "supported_constraint_types": {
+    "bbox_dimensions": {
+      "geometry_source": "STL",
+      "default_absolute_tolerance_mm": 0.5,
+      "default_relative_tolerance": 0.01,
+      "tolerance_rule": "max(absolute_tolerance_mm, abs(expected_mm) * relative_tolerance)"
+    },
+    "bbox_bounds": {
+      "geometry_source": "STL",
+      "default_absolute_tolerance_mm": 0.5,
+      "default_relative_tolerance": 0.01,
+      "tolerance_rule": "max(absolute_tolerance_mm, abs(expected_mm) * relative_tolerance)"
+    },
+    "solid_count": {
+      "geometry_source": "STEP",
+      "comparison": "exact_integer_equality"
+    },
+    "cylindrical_hole_pattern": {
+      "geometry_source": "STEP",
+      "checks": [
+        "count",
+        "diameter",
+        "principal_axis",
+        "through_or_blind",
+        "optional_pitch_circle_diameter"
+      ],
+      "default_diameter_tolerance_mm": 0.3,
+      "default_position_tolerance_mm": 0.5
+    }
+  },
+  "task_success": {
+    "task_success_v1": "artifact_success and every registered hard bbox constraint is evaluated and passed",
+    "task_success_v2": "artifact_success and every registered v2 hard constraint is evaluated and passed"
+  },
+  "missing_evidence_policy": "An unavailable geometry source makes its constraints unevaluated; an unevaluated hard constraint prevents task success.",
+  "change_policy": {
+    "same_version": "Implementation fixes that preserve all metric and constraint semantics.",
+    "new_version_required": "New constraint types, changed tolerances, changed geometry interpretation, or changed task-success semantics."
+  }
+}

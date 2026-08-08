@@ -78,7 +78,9 @@ class Text2CadApp(tk.Tk):
         )
         self.rag_mode_selector.pack(anchor=tk.W)
 
-        ttk.Label(options, text="Max repair attempts").pack(anchor=tk.W, pady=(8, 0))
+        ttk.Label(options, text="Total repair budget (all failure types)").pack(
+            anchor=tk.W, pady=(8, 0)
+        )
         self.repairs_var = tk.IntVar(value=2)
         ttk.Spinbox(options, from_=0, to=5, textvariable=self.repairs_var, width=8).pack(anchor=tk.W)
 
@@ -132,9 +134,12 @@ class Text2CadApp(tk.Tk):
             )
             final = result.final_attempt
             if not result.success:
+                telemetry = result.telemetry
                 self._ui_error(
-                    "Generation failed after repair attempts.\n\n"
+                    "Generation failed within the total repair budget.\n\n"
                     f"Run directory: {result.run_dir}\n\n{final.stderr}"
+                    f"\nExecution repairs: {telemetry['execution_repairs']}"
+                    f"\nConstraint repairs: {telemetry['constraint_repairs']}"
                 )
                 return
 
@@ -161,12 +166,33 @@ class Text2CadApp(tk.Tk):
     ) -> None:
         def update() -> None:
             final = result.final_attempt
+            telemetry = result.telemetry
+            usage = telemetry["token_usage"]
+            cost = telemetry["cost"]
+            timing = telemetry["timing"]
+            token_text = usage["total_tokens"] if usage["total_tokens"] is not None else "not returned"
+            cost_text = (
+                f"{cost['estimated_total']} {cost['currency'] or ''}".rstrip()
+                if cost["estimated_total"] is not None
+                else "not available"
+            )
             self.status.set("Done.")
             self._set_log(
                 "Done.\n"
                 f"Run directory: {result.run_dir}\n"
                 f"Attempts: {len(result.attempts)}\n"
+                f"Total repair budget: {telemetry['total_repair_budget']}\n"
+                f"Execution repairs: {telemetry['execution_repairs']}\n"
+                f"Constraint repairs: {telemetry['constraint_repairs']}\n"
+                f"Execution pass: {telemetry['execution_pass_within_repair_budget']}\n"
+                f"Constraint pass: {telemetry['constraint_pass_within_repair_budget']}\n"
+                f"End-to-end pass: {telemetry['end_to_end_pass_within_repair_budget']}\n"
                 f"Setting: {result.rag_mode}\n"
+                f"Total tokens: {token_text}\n"
+                f"Estimated cost: {cost_text}\n"
+                f"LLM time: {timing['llm_seconds']} s\n"
+                f"CadQuery execution time: {timing['cad_execution_seconds']} s\n"
+                f"End-to-end time: {timing['end_to_end_seconds']} s\n"
                 f"References: {', '.join(result.reference_ids) if result.reference_ids else 'none'}\n"
                 f"Generated code: {final.code_path}\n"
                 f"STEP: {final.step_path}\n"

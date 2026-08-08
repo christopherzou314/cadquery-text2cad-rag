@@ -20,7 +20,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--api-key", help="API key. Prefer OPENAI_API_KEY for normal use.")
     parser.add_argument("--python", help="Python interpreter with cadquery installed.")
     parser.add_argument("--output-dir", default="outputs", help="Directory for run artifacts.")
-    parser.add_argument("--max-repairs", type=int, default=2, help="Number of traceback repair attempts.")
+    parser.add_argument(
+        "--max-repairs",
+        type=int,
+        default=2,
+        help="Total code-repair budget across execution and constraint failures.",
+    )
+    parser.add_argument("--seed", type=int, help="Experiment seed to record for this run.")
+    parser.add_argument(
+        "--send-seed",
+        action="store_true",
+        help="Send --seed to APIs that explicitly support the seed field.",
+    )
     parser.add_argument("--rag", action="store_true", help="Inject retrieved CadQuery references.")
     parser.add_argument(
         "--rag-mode",
@@ -47,6 +58,8 @@ def main() -> None:
         base_url=args.api_base,
         rag_mode=rag_mode,
         rag_top_k=args.rag_top_k,
+        seed=args.seed,
+        send_seed=args.send_seed,
     )
 
     final = result.final_attempt
@@ -60,7 +73,18 @@ def main() -> None:
     print("Done.")
     print(f"Run directory: {result.run_dir}")
     print(f"Attempts: {len(result.attempts)}")
+    print(f"Execution repairs: {result.telemetry['execution_repairs']}")
+    print(f"Constraint repairs: {result.telemetry['constraint_repairs']}")
     print(f"Generation setting: {result.rag_mode}")
+    print(f"Seed: {result.telemetry['seed_requested']}")
+    print(f"End-to-end time: {result.telemetry['timing']['end_to_end_seconds']} s")
+    total_tokens = result.telemetry["token_usage"]["total_tokens"]
+    estimated_cost = result.telemetry["cost"]["estimated_total"]
+    print(f"Total tokens: {total_tokens if total_tokens is not None else 'not returned'}")
+    if estimated_cost is None:
+        print("Estimated cost: not available")
+    else:
+        print(f"Estimated cost: {estimated_cost} {result.telemetry['cost']['currency']}")
     if result.reference_ids:
         print(f"References: {', '.join(result.reference_ids)}")
     print(f"Generated code: {final.code_path}")
